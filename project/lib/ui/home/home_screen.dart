@@ -1,11 +1,13 @@
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/material.dart';
 import 'package:project/components/horizontal_listview.dart';
-import 'package:project/components/products.dart';
-import 'package:project/pages/account_screen.dart';
-import 'package:project/pages/order_screen.dart';
+import 'package:project/ui/product/products_gridview.dart';
+import 'package:project/ui/account_management/account_screen.dart';
+import 'package:project/ui/orders_history/orders_screen.dart';
+import 'package:project/ui/text_divider.dart';
 
-class HomePage extends StatelessWidget {
+
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget assetsCarousel = new Container(
@@ -29,7 +31,7 @@ class HomePage extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: new AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text('Shop Mobile App'),
         actions: [
@@ -86,7 +88,7 @@ class HomePage extends StatelessWidget {
 
             InkWell(
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => OrderScreen())),
+                  .push(MaterialPageRoute(builder: (context) => OrdersScreen())),
               child: ListTile(
                 title: Text('My order'),
                 leading: Icon(Icons.shopping_basket),
@@ -137,19 +139,21 @@ class HomePage extends StatelessWidget {
           //assets carousel begins here
           assetsCarousel,
 
-          //new padding widget
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Categories'),
+          TextDivider(
+            child: Text(
+              'Categories',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
           ),
 
           //horizontal list view begins here
           HorizontalList(),
 
-          //padding widget
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Recent products'),
+          TextDivider(
+            child: Text(
+              'Recent products',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
           ),
 
           //Grid view

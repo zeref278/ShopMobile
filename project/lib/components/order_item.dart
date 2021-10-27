@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project/constants.dart';
 import 'package:project/model/order.dart';
-import 'package:project/pages/order_detail_page.dart';
+import 'package:project/ui/orders_history/order_detail_screen.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({
@@ -13,125 +14,104 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => OrderDetailPage())),
-      child: SizedBox(
-        height: 120,
-        width: double.infinity,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => OrderDetailScreen())),
+      child: Container(
+          padding: EdgeInsets.all(10),
+          width: size.width,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.grey.withOpacity(0.5)),
           ),
-          elevation: 5,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Row(
-              children: [
-                Icon(
-                  order.status == 1
-                      ? Icons.pending
-                      : (order.status == 2
-                          ? Icons.local_shipping
-                          : Icons.place),
-                  size: 50,
-                  color: order.status == 1
-                      ? Colors.red
-                      : (order.status == 2 ? Colors.blue : Colors.purple),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "ORDER ID: ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          Text(
-                            order.idOrder,
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Icon(
+                order.status == 1
+                    ? Icons.pending
+                    : (order.status == 2 ? Icons.local_shipping : Icons.place),
+                size: 40,
+                color: order.status == 1
+                    ? Colors.red
+                    : (order.status == 2 ? Colors.blue : Colors.purple),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Order ID: " + order.id,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "ORDER STATUS: ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Order Status: ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
                           ),
-                          Text(
-                            order.status == 1
-                                ? "Ordering"
+                        ),
+                        Text(
+                          order.status == 1
+                              ? "Ordering"
+                              : (order.status == 2
+                                  ? "Delivering"
+                                  : "Delivered"),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: order.status == 1
+                                ? Colors.red
                                 : (order.status == 2
-                                    ? "Delivering"
-                                    : "Deliveried"),
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: order.status == 1
-                                  ? Colors.red
-                                  : (order.status == 2
-                                      ? Colors.blue
-                                      : Colors.purple),
-                              fontWeight: FontWeight.bold,
-                            ),
+                                    ? Colors.blue
+                                    : Colors.purple),
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            "TOTAL PRICE: ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "TOTAL PRICE: ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
-                          Text(
-                            '${NumberFormat.decimalPattern().format(order.totalPrice)}\$',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        Text(
+                          '${formatter.format(order.totalPrice)} VNĐ',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green[700]
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: Icon(
-                    Icons.arrow_right,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
+              )
+            ],
+          )),
     );
   }
 }

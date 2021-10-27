@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/components/order_detail_item.dart';
 
-class OrderDetailPage extends StatelessWidget {
+class OrderDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

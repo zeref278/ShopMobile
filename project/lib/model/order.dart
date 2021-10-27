@@ -1,8 +1,8 @@
 class Order {
-  final String idOrder;
+  final String id;
   final double totalPrice;
   final int status;
 
   Order(
-      {required this.idOrder, required this.totalPrice, required this.status});
+      {required this.id, required this.totalPrice, required this.status});
 }

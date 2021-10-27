@@ -3,8 +3,8 @@ import 'package:project/components/order_item.dart';
 import 'package:project/providers/order_provider.dart';
 import 'package:provider/provider.dart';
 
-class OrderScreen extends StatelessWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

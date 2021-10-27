@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/pages/home_page.dart';
+import 'package:project/ui/home/home_screen.dart';
 import 'package:project/providers/order_provider.dart';
 import 'package:project/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: HomeScreen(),
       ),
     );
   }
