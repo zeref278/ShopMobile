@@ -7,7 +7,7 @@ import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/product/products_gridview.dart';
 import 'package:project/ui/account_management/account_screen.dart';
 import 'package:project/ui/orders_history/orders_screen.dart';
-import 'package:project/ui/text_divider.dart';
+import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
 
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget assetsCarousel = new Container(
       height: 200.0,
-      child: new Carousel(
+      child: Carousel(
         boxFit: BoxFit.cover,
         images: [
           Image.asset('assets/carousel/img1.jpg'),
@@ -30,13 +30,14 @@ class HomeScreen extends StatelessWidget {
         ],
         autoplay: false,
         dotSize: 4.0,
-        indicatorBgPadding: 2.0,
-        //animationCurve: Curves.fastOutSlowIn,
-        //animationDuration: Duration(microseconds: 1000),
+        indicatorBgPadding: 0,
+        // animationCurve: Curves.linear,
+        // animationDuration: Duration(microseconds: 3000),
       ),
     );
 
     return Scaffold(
+      backgroundColor: defaultBackgroundColor,
       appBar: AppBar(
         backgroundColor: defaultPrimaryColor,
         title: Text('Shop Mobile App'),
@@ -148,7 +149,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: new ListView(
+      body: ListView(
         children: <Widget>[
           //assets carousel begins here
           assetsCarousel,
@@ -156,7 +157,7 @@ class HomeScreen extends StatelessWidget {
           TextDivider(
             child: Text(
               'Categories',
-              style: TextStyle(fontWeight: FontWeight.w600),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
           ),
 
@@ -165,14 +166,14 @@ class HomeScreen extends StatelessWidget {
 
           TextDivider(
             child: Text(
-              'Recent products',
-              style: TextStyle(fontWeight: FontWeight.w600),
+              'Recent Product',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
           ),
 
           //Grid view
           Container(
-            height: 320,
+            //height: ,
             child: Products(),
           )
         ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/models/order.dart';
-import 'package:project/ui/cart/cart_items.dart';
+import 'package:project/ui/widget_customization/card_customization/cart_items.dart';
 
 import '../../constants.dart';
-import 'order_detail_item.dart';
+import '../widget_customization/card_customization/order_detail_item.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   final Order order;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:project/data/list_product.dart';
 import 'package:project/ui/product/product_detail_screen.dart';
-import 'package:project/ui/product/product_item.dart';
+import 'package:project/ui/widget_customization/card_customization/product_item.dart';
 
 class Products extends StatefulWidget {
   @override
@@ -14,6 +14,8 @@ class _ProductsState extends State<Products> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+        shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
         itemCount: listProduct.length,
         gridDelegate:
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),

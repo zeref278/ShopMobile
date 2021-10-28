@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/constants.dart';
-import 'package:project/ui/orders_history/order_item.dart';
+import 'package:project/ui/widget_customization/card_customization/order_item.dart';
 import 'package:project/providers/orders_provider.dart';
 import 'package:provider/provider.dart';
 

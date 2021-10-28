@@ -6,12 +6,12 @@ import 'package:project/models/order.dart';
 import 'package:project/providers/cart_provider.dart';
 import 'package:project/providers/orders_provider.dart';
 import 'package:project/providers/users_provider.dart';
-import 'package:project/ui/custom_button.dart';
-import 'package:project/ui/orders_history/order_detail_item.dart';
+import 'package:project/ui/widget_customization/button_customization/custom_button.dart';
+import 'package:project/ui/widget_customization/card_customization/order_detail_item.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
-import '../text_divider.dart';
+import '../widget_customization/divider_customization/text_divider.dart';
 
 class CheckoutScreen extends StatefulWidget {
   @override
@@ -148,7 +148,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),
               ),
-              CustomButton(
+              ButtonCustomization(
                 textColor: !isCod ? Colors.white : Colors.black,
                 iconData: CupertinoIcons.creditcard,
                 color: !isCod ? Colors.green : Colors.white,
@@ -168,7 +168,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               SizedBox(
                 height: 10,
               ),
-              CustomButton(
+              ButtonCustomization(
                 textColor: isCod ? Colors.white : Colors.black,
                 iconData: CupertinoIcons.paperplane,
                 color: isCod ? Colors.green : Colors.white,

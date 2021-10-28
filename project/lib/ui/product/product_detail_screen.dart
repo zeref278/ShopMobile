@@ -6,7 +6,7 @@ import 'package:project/models/cart_item_model.dart';
 import 'package:project/models/product.dart';
 import 'package:project/providers/cart_provider.dart';
 import 'package:project/ui/cart/cart_screen.dart';
-import 'package:project/ui/text_divider.dart';
+import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {

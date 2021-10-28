@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:project/providers/cart_provider.dart';
 import 'package:project/providers/orders_provider.dart';
-import 'package:project/ui/cart/cart_items.dart';
+import 'package:project/ui/widget_customization/card_customization/cart_items.dart';
 import 'package:project/ui/checkout/checkout_screen.dart';
 import 'package:provider/provider.dart';
 
