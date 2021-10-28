@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class CustomButton extends StatelessWidget {
+class ButtonCustomization extends StatelessWidget {
   final String text;
   final void Function() onPressed;
   final Color color, textColor;
@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
   final IconData iconData;
   final Icon tailIcon;
 
-  const CustomButton({
+  const ButtonCustomization({
     Key? key,
     required this.text,
     required this.onPressed,
