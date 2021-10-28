@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project/model/user.dart';
+import 'package:project/models/user.dart';
 
 class UserProvider with ChangeNotifier {
   User get user => _demoUser;

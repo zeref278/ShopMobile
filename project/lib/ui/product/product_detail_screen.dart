@@ -1,7 +1,13 @@
+import 'package:badges/badges.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/constants.dart';
-import 'package:project/model/product.dart';
+import 'package:project/models/cart_item_model.dart';
+import 'package:project/models/product.dart';
+import 'package:project/providers/cart_provider.dart';
+import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/text_divider.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -31,21 +37,29 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.1,
-        backgroundColor: Colors.red,
+        backgroundColor: defaultPrimaryColor,
         title: Text('Shop Mobile App'),
         actions: <Widget>[
           IconButton(
               icon: Icon(
-                Icons.search,
+                CupertinoIcons.search,
                 color: Colors.white,
               ),
               onPressed: () {}),
           IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
+              icon: Consumer<CartProvider>(
+                builder:(context, cartData, _) {
+                  return Badge(
+                    elevation: 0,
+                    badgeColor: cartData.cart.length == 0 ? Colors.transparent : Colors.red,
+                    badgeContent: Text(cartData.cart.length == 0 ? '' : '${cartData.cart.length}'),
+                    child: Icon(CupertinoIcons.cart),
+                  );
+                },
               ),
-              onPressed: () {})
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => CartScreen()))),
+          SizedBox(width: 5)
         ],
       ),
       body: SafeArea(
@@ -74,14 +88,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           children: <Widget>[
                             Expanded(
                               child: new Text(
-                                  "${formatter.format(widget.product.oldPrice)} VNĐ",
+                                  "${formatter.format(widget.product.calcOldPrice(_storage!, _color!))} VNĐ",
                                   style: TextStyle(
                                       color: Colors.black54,
                                       decoration: TextDecoration.lineThrough)),
                             ),
                             Expanded(
                                 child: new Text(
-                              "${formatter.format(widget.product.price)} VNĐ",
+                              "${formatter.format(widget.product.calcPrice(_storage!, _color!))} VNĐ",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.red),
@@ -100,7 +114,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(width: 1)),
+                    border: Border.all(width: 2, color: defaultPrimaryColor)),
                 width: 250,
                 child: Column(
                   children: <Widget>[
@@ -201,16 +215,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     //======The size button
                     Expanded(
                         child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                       color: Colors.red,
                       textColor: Colors.white,
                       elevation: 0.2,
                       child: Text("Buy now"),
                     )),
-
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.add_shopping_cart, color: Colors.red)),
+                    Consumer<CartProvider>(
+                      builder: (context, cartData, _) {
+                        return IconButton(
+                            onPressed: () {
+                              cartData.addItem(CartItemModel(
+                                  product: widget.product,
+                                  quantity: _quantity,
+                                  color: _color!,
+                                  storage: _storage!));
+                            },
+                            icon: Icon(Icons.add_shopping_cart, color: Colors.red));
+                      },
+                    ),
+                    
                     IconButton(
                         onPressed: () {
                           setState(() {

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/order_detail_item.dart';
+import 'package:project/models/order.dart';
+import 'package:project/ui/cart/cart_items.dart';
+
+import '../../constants.dart';
+import 'order_detail_item.dart';
 
 class OrderDetailScreen extends StatelessWidget {
+  final Order order;
+
+  OrderDetailScreen({required this.order});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,45 +22,42 @@ class OrderDetailScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.red,
       ),
-      body: Container(
-        margin: EdgeInsets.only(bottom: 90),
-        child: ListView.builder(
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            return OrderItem();
-          },
-        ),
-      ),
-      bottomSheet: checkoutSection(context, 1000000),
-    );
-  }
-
-  Widget checkoutSection(BuildContext context, double subTotal) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 15),
-        child: Row(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        child: Column(
           children: [
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+            Container(
+              child: Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: order.listItem.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return OrderDetailItem(
+                      itemModel: order.listItem[index],);
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10, right: 10),
               child: Row(
-                children: [
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
                   Text(
-                    'Total: ',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    'TOTAL PRICE: ',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
                   ),
                   Text(
-                    '\$ ${subTotal.toStringAsFixed(3)}',
-                    textAlign: TextAlign.center,
+                    '${formatter.format(order.totalPrice)} VNĐ',
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    ),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange),
                   ),
+
                 ],
               ),
             ),

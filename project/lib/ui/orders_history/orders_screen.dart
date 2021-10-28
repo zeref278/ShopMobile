@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/order_item.dart';
-import 'package:project/providers/order_provider.dart';
+import 'package:project/constants.dart';
+import 'package:project/ui/orders_history/order_item.dart';
+import 'package:project/providers/orders_provider.dart';
 import 'package:provider/provider.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: defaultPrimaryColor,
         title: Text("My order"),
       ),
       body: Consumer<OrderProvider>(builder: (context, provider, child) {

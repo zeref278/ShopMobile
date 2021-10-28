@@ -1,0 +1,169 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'package:project/providers/cart_provider.dart';
+import 'package:project/providers/orders_provider.dart';
+import 'package:project/ui/cart/cart_items.dart';
+import 'package:project/ui/checkout/checkout_screen.dart';
+import 'package:provider/provider.dart';
+
+
+import '../../constants.dart';
+
+class CartScreen extends StatefulWidget {
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  //bool _isLoading = false;
+
+  @override
+  void initState() {
+    // setState(() {
+    //   _isLoading = true;
+    // });
+
+    // Provider.of<CartProvider>(context, listen: false)
+    //     .fetchAndSetCategories()
+    //     .then((_) {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    // });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.1,
+        backgroundColor: defaultPrimaryColor,
+        title: Text('Your cart'),
+        actions: [
+          Consumer<CartProvider>(
+            builder: (context, cartData, _) {
+              return IconButton(
+                disabledColor: defaultPrimaryColor,
+                color: Colors.red,
+                icon: Icon(
+                  CupertinoIcons.clear_fill,
+                ),
+                onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Clear cart"),
+                        content: Text("Do you want clear all item ?"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                cartData.clearAll();
+                              },
+                              child: Text(
+                                "Confirm",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.red),
+                              )),
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                        ],
+                      );
+                    }),
+              );
+            },
+          ),
+          SizedBox(width: 5)
+        ],
+      ),
+      body: Consumer<CartProvider>(
+        builder: (context, cartData, _) {
+          return cartData.cart.length == 0
+              ? Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(CupertinoIcons.bag_badge_minus,
+                          color: Colors.red, size: 40),
+                      SizedBox(width: 10),
+                      Text(
+                        'Your cart is empty !',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.red,
+                            fontSize: 20),
+                      )
+                    ],
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Flexible(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: cartData.cart.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CartItem(
+                                  index: index,
+                                  onPressedDelete: () {
+                                    cartData.removeItem(index);
+                                  });
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Total Price: ',
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              '${formatter.format(cartData.calcTotalPrice())} VNĐ',
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.deepOrange),
+                            ),
+                            Consumer<OrderProvider>(
+                                builder: (context, orderData, _) {
+                              return MaterialButton(
+                                onPressed: () => Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) => CheckoutScreen())),
+                                color: Colors.red,
+                                textColor: Colors.white,
+                                elevation: 0.2,
+                                child: Text("Buy Now"),
+                              );
+                            })
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+        },
+      ),
+    );
+  }
+}

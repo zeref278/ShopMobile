@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/providers/user_provider.dart';
+import 'package:project/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'account_edit_screen.dart';

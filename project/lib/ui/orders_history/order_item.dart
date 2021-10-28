@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:project/constants.dart';
-import 'package:project/model/order.dart';
+import 'package:project/models/order.dart';
 import 'package:project/ui/orders_history/order_detail_screen.dart';
 
 class OrderItem extends StatelessWidget {
@@ -17,7 +16,7 @@ class OrderItem extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) => OrderDetailScreen())),
+          MaterialPageRoute(builder: (context) => OrderDetailScreen(order: order,))),
       child: Container(
           padding: EdgeInsets.all(10),
           width: size.width,
@@ -98,7 +97,7 @@ class OrderItem extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color: Colors.green[700]
+                            color: Colors.red
                           ),
                         ),
                       ],

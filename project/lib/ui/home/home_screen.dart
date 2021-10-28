@@ -1,11 +1,17 @@
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/components/horizontal_listview.dart';
+import 'package:project/providers/cart_provider.dart';
+import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/product/products_gridview.dart';
 import 'package:project/ui/account_management/account_screen.dart';
 import 'package:project/ui/orders_history/orders_screen.dart';
 import 'package:project/ui/text_divider.dart';
+import 'package:provider/provider.dart';
+import 'package:badges/badges.dart';
 
+import '../../constants.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -32,21 +38,29 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: defaultPrimaryColor,
         title: Text('Shop Mobile App'),
         actions: [
           IconButton(
               icon: Icon(
-                Icons.search,
+                CupertinoIcons.search,
                 color: Colors.white,
               ),
               onPressed: () {}),
           IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
+              icon: Consumer<CartProvider>(
+                builder:(context, cartData, _) {
+                  return Badge(
+                    elevation: 0,
+                    badgeColor: cartData.cart.length == 0 ? Colors.transparent : Colors.red,
+                    badgeContent: Text(cartData.cart.length == 0 ? '' : '${cartData.cart.length}'),
+                    child: Icon(CupertinoIcons.cart),
+                  );
+                },
               ),
-              onPressed: () {})
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => CartScreen()))),
+          SizedBox(width: 5)
         ],
       ),
       drawer: Drawer(
@@ -65,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              decoration: BoxDecoration(color: Colors.red),
+              decoration: BoxDecoration(color: defaultPrimaryColor),
             ),
 
             //body
@@ -87,8 +101,8 @@ class HomeScreen extends StatelessWidget {
             ),
 
             InkWell(
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => OrdersScreen())),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => OrdersScreen())),
               child: ListTile(
                 title: Text('My order'),
                 leading: Icon(Icons.shopping_basket),
