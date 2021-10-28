@@ -10,10 +10,10 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: defaultPrimaryColor,
-        title: Text("My order"),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: defaultPrimaryColor,
+      //   title: Text("My order"),
+      // ),
       body: Consumer<OrderProvider>(builder: (context, provider, child) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),

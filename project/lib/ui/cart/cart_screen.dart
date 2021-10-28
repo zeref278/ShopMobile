@@ -50,7 +50,7 @@ class _CartScreenState extends State<CartScreen> {
                 icon: Icon(
                   CupertinoIcons.clear_fill,
                 ),
-                onPressed: () => showDialog(
+                onPressed: cartData.cart.length == 0 ? null :() => showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(

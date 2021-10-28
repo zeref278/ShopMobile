@@ -13,7 +13,13 @@ import 'package:badges/badges.dart';
 
 import '../../constants.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     Widget assetsCarousel = new Container(
@@ -38,117 +44,122 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: defaultPrimaryColor,
-        title: Text('Shop Mobile App'),
-        actions: [
-          IconButton(
-              icon: Icon(
-                CupertinoIcons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {}),
-          IconButton(
-              icon: Consumer<CartProvider>(
-                builder:(context, cartData, _) {
-                  return Badge(
-                    elevation: 0,
-                    badgeColor: cartData.cart.length == 0 ? Colors.transparent : Colors.red,
-                    badgeContent: Text(cartData.cart.length == 0 ? '' : '${cartData.cart.length}'),
-                    child: Icon(CupertinoIcons.cart),
-                  );
-                },
-              ),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CartScreen()))),
-          SizedBox(width: 5)
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            //header
-            UserAccountsDrawerHeader(
-              accountName: Text('Tran Linh'),
-              accountEmail: Text('linhtranttdl@gmail.com'),
-              currentAccountPicture: GestureDetector(
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              decoration: BoxDecoration(color: defaultPrimaryColor),
-            ),
+      // appBar: AppBar(
+      //   backgroundColor: defaultPrimaryColor,
+      //   title: Text('Shop Mobile App'),
+      //   actions: [
+      //     IconButton(
+      //         icon: Icon(
+      //           CupertinoIcons.search,
+      //           color: Colors.white,
+      //         ),
+      //         onPressed: () {}),
+      //     IconButton(
+      //         icon: Consumer<CartProvider>(
+      //           builder: (context, cartData, _) {
+      //             return Badge(
+      //               elevation: 0,
+      //               badgeColor: cartData.cart.length == 0
+      //                   ? Colors.transparent
+      //                   : Colors.red,
+      //               badgeContent: Text(cartData.cart.length == 0
+      //                   ? ''
+      //                   : '${cartData.cart.length}'),
+      //               child: Icon(CupertinoIcons.cart),
+      //             );
+      //           },
+      //         ),
+      //         onPressed: () => Navigator.of(context)
+      //             .push(MaterialPageRoute(builder: (context) => CartScreen()))),
+      //     SizedBox(width: 5)
+      //   ],
+      // ),
 
-            //body
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('Home Page'),
-                leading: Icon(Icons.home),
-              ),
-            ),
-
-            InkWell(
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => AccountView())),
-              child: ListTile(
-                title: Text('My account'),
-                leading: Icon(Icons.person),
-              ),
-            ),
-
-            InkWell(
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => OrdersScreen())),
-              child: ListTile(
-                title: Text('My order'),
-                leading: Icon(Icons.shopping_basket),
-              ),
-            ),
-
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('My categories'),
-                leading: Icon(Icons.dashboard),
-              ),
-            ),
-
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('My favourite'),
-                leading: Icon(Icons.favorite),
-              ),
-            ),
-
-            Divider(),
-
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('Setting'),
-                leading: Icon(Icons.dashboard, color: Colors.blue),
-              ),
-            ),
-
-            InkWell(
-              onTap: () {},
-              child: ListTile(
-                title: Text('About'),
-                leading: Icon(
-                  Icons.help,
-                  color: Colors.green,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     children: <Widget>[
+      //       //header
+      //       UserAccountsDrawerHeader(
+      //         accountName: Text('Tran Linh'),
+      //         accountEmail: Text('linhtranttdl@gmail.com'),
+      //         currentAccountPicture: GestureDetector(
+      //           child: CircleAvatar(
+      //             backgroundColor: Colors.grey,
+      //             child: Icon(
+      //               Icons.person,
+      //               color: Colors.white,
+      //             ),
+      //           ),
+      //         ),
+      //         decoration: BoxDecoration(color: defaultPrimaryColor),
+      //       ),
+      //
+      //       //body
+      //       InkWell(
+      //         onTap: () {},
+      //         child: ListTile(
+      //           title: Text('Home Page'),
+      //           leading: Icon(Icons.home),
+      //         ),
+      //       ),
+      //
+      //       InkWell(
+      //         onTap: () => Navigator.of(context)
+      //             .push(MaterialPageRoute(builder: (context) => AccountView())),
+      //         child: ListTile(
+      //           title: Text('My account'),
+      //           leading: Icon(Icons.person),
+      //         ),
+      //       ),
+      //
+      //       InkWell(
+      //         onTap: () => Navigator.of(context).push(
+      //             MaterialPageRoute(builder: (context) => OrdersScreen())),
+      //         child: ListTile(
+      //           title: Text('My order'),
+      //           leading: Icon(Icons.shopping_basket),
+      //         ),
+      //       ),
+      //
+      //       InkWell(
+      //         onTap: () {},
+      //         child: ListTile(
+      //           title: Text('My categories'),
+      //           leading: Icon(Icons.dashboard),
+      //         ),
+      //       ),
+      //
+      //       InkWell(
+      //         onTap: () {},
+      //         child: ListTile(
+      //           title: Text('My favourite'),
+      //           leading: Icon(Icons.favorite),
+      //         ),
+      //       ),
+      //
+      //       Divider(),
+      //
+      //       InkWell(
+      //         onTap: () {},
+      //         child: ListTile(
+      //           title: Text('Setting'),
+      //           leading: Icon(Icons.dashboard, color: Colors.blue),
+      //         ),
+      //       ),
+      //
+      //       InkWell(
+      //         onTap: () {},
+      //         child: ListTile(
+      //           title: Text('About'),
+      //           leading: Icon(
+      //             Icons.help,
+      //             color: Colors.green,
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: ListView(
         children: <Widget>[
           //assets carousel begins here
@@ -180,4 +191,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
 }
+

@@ -12,20 +12,20 @@ class AccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text("Account Information"),
-        actions: [
-          IconButton(
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AccountEditScreen(),
-                    ),
-                  ),
-              icon: Icon(Icons.edit)),
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.red,
+      //   title: Text("Account Information"),
+      //   actions: [
+      //     IconButton(
+      //         onPressed: () => Navigator.push(
+      //               context,
+      //               MaterialPageRoute(
+      //                 builder: (context) => AccountEditScreen(),
+      //               ),
+      //             ),
+      //         icon: Icon(Icons.edit)),
+      //   ],
+      // ),
       body: SingleChildScrollView(
         child: Consumer<UserProvider>(builder: (context, provider, child) {
           return Column(

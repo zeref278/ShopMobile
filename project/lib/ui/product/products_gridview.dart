@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:project/data/list_product.dart';
-import 'package:project/ui/product/product_detail_screen.dart';
 import 'package:project/ui/widget_customization/card_customization/product_item.dart';
 
 class Products extends StatefulWidget {
