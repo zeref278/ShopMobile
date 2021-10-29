@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/data/list_product.dart';
 import 'package:project/models/cart_item_model.dart';
 
 class CartProvider with ChangeNotifier {

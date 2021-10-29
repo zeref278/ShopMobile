@@ -5,6 +5,7 @@ import 'package:project/providers/cart_provider.dart';
 import 'package:project/providers/users_provider.dart';
 import 'package:project/ui/account_management/account_screen.dart';
 import 'package:project/ui/cart/cart_screen.dart';
+import 'package:project/ui/favorites/favorites_screen.dart';
 import 'package:project/ui/home/home_screen.dart';
 import 'package:project/ui/orders_history/orders_screen.dart';
 import 'package:badges/badges.dart';
@@ -29,7 +30,7 @@ class MenuScreenState extends State<MenuScreen> {
     } else if (currentPage == DrawerSections.orderhistory) {
       container = OrdersScreen();
     } else if (currentPage == DrawerSections.favorite) {
-      container = ProfileScreen();
+      container = FavoritesScreen();
     } else if (currentPage == DrawerSections.settings) {
       container = ProfileScreen();
     } else if (currentPage == DrawerSections.about) {
@@ -108,7 +109,7 @@ class MenuScreenState extends State<MenuScreen> {
       child: Column(
         // shows the list of menu drawer
         children: [
-          menuItem(1, "Shop Mobile", CupertinoIcons.shopping_cart,
+          menuItem(1, "Shop Mobile", CupertinoIcons.device_phone_portrait,
               currentPage == DrawerSections.homescreen ? true : false),
           menuItem(2, "Profile", CupertinoIcons.person,
               currentPage == DrawerSections.profile ? true : false),

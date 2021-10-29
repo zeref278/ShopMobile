@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project/providers/cart_provider.dart';
 
 import 'package:project/providers/orders_provider.dart';
+import 'package:project/providers/products_provider.dart';
 import 'package:project/providers/users_provider.dart';
 import 'package:project/ui/widget_customization/drawer_customization/menu_screen.dart';
 
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
+        ),
         ChangeNotifierProvider(
           create: (context) => UserProvider(),
         ),

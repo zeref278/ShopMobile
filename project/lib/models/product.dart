@@ -6,6 +6,7 @@ class Product {
   String picturePath;
   int? oldPrice;
   List<String> storageAvailable;
+  bool isFavorite;
 
   // To create dynamic price from options
   var bonusMap;
@@ -25,6 +26,7 @@ class Product {
 
   //Constructor
   Product({
+    required this.isFavorite,
     required this.name,
     required this.price,
     required this.category,
