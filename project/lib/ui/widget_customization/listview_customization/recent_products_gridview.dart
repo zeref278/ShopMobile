@@ -3,12 +3,12 @@ import 'package:flutter/rendering.dart';
 import 'package:project/data/list_product.dart';
 import 'package:project/ui/widget_customization/card_customization/product_item.dart';
 
-class Products extends StatefulWidget {
+class RecentProductsGridview extends StatefulWidget {
   @override
-  _ProductsState createState() => _ProductsState();
+  _RecentProductsGridviewState createState() => _RecentProductsGridviewState();
 }
 
-class _ProductsState extends State<Products> {
+class _RecentProductsGridviewState extends State<RecentProductsGridview> {
 
   @override
   Widget build(BuildContext context) {

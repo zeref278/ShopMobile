@@ -64,7 +64,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             children: [
                               Text('Name: ', style: TextStyle(fontSize: 16)),
                               Text(
-                                '${userData.user.name}',
+                                '${userData.user.userName}',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,

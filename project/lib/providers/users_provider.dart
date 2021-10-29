@@ -7,30 +7,28 @@ class UserProvider with ChangeNotifier {
 
   User _demoUser = User(
     idUser: 02,
-    name: 'Tran Linh',
+    userName: 'Tran Linh',
     email: 'linhtranttdl@gmail.com',
-    userName: 'tranlinh123',
     address: 'Da Nang',
     gender: true,
     dateOfBirth: DateFormat("dd/MM/yyyy").format(DateTime.parse("2019-09-30")),
     phoneNumber: '0123456789',
+    avatarPath: 'assets/avatar.png',
   );
 
   void changeInformation(
-      {String? name,
-      String? email,
+      {String? email,
       String? username,
       String? address,
-      bool? gender,
       String? dateOfBirth,
       String? phoneNumber}) {
-    _demoUser.name = name ?? _demoUser.name;
-    _demoUser.email = email ?? _demoUser.email;
-    _demoUser.userName = username ?? _demoUser.userName;
-    _demoUser.address = address ?? _demoUser.address;
-    _demoUser.gender = gender ?? _demoUser.gender;
-    _demoUser.phoneNumber = phoneNumber ?? _demoUser.phoneNumber;
-    _demoUser.dateOfBirth = dateOfBirth ?? _demoUser.dateOfBirth;
+    _demoUser.email = (email == '' ? _demoUser.email : email)!;
+    _demoUser.userName = (username == '' ? _demoUser.userName : username)!;
+    _demoUser.address = address == '' ? _demoUser.address : address;
+    _demoUser.phoneNumber =
+        (phoneNumber == '' ? _demoUser.phoneNumber : phoneNumber)!;
+    _demoUser.dateOfBirth =
+        dateOfBirth == '' ? _demoUser.dateOfBirth : dateOfBirth;
     notifyListeners();
   }
 }
