@@ -37,6 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
+    Size size = MediaQuery.of(context).size;
+    const colorizeColors = [
+      Colors.purple,
+      Colors.blue,
+      Colors.yellow,
+      Colors.red,
+    ];
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       body: ListView(
@@ -44,16 +51,35 @@ class _HomeScreenState extends State<HomeScreen> {
           //assets carousel begins here
           assetsCarousel,
 
-          TextDivider(
-            child: Text(
-              'Categories',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AnimatedTextKit(repeatForever: true, animatedTexts: [
+                  ColorizeAnimatedText('Flash Sale',
+                      textStyle: TextStyle(
+                          fontFamily: 'Catamaran',
+                          fontWeight: FontWeight.w900,
+                          fontSize: 25),
+                      colors: colorizeColors),
+                ]),
+                CountDownTimer(
+                  timeStart: '2021-11-20 20:00:00',
+                ),
+              ],
             ),
           ),
 
           //horizontal list view begins here
-          HorizontalList(),
-
+          Container(
+              height: 200,
+              decoration: BoxDecoration(),
+              child: HorizontalList()),
+          //HorizontalList(),
           TextDivider(
             child: Text(
               'Recent Product',

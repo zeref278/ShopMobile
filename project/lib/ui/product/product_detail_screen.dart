@@ -97,14 +97,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           title: Row(
                             children: <Widget>[
                               Expanded(
-                                child: new Text(
+                                child: Text(
                                     "${formatter.format(widget.product.calcOldPrice(_storage!, _color!))} VNĐ",
                                     style: TextStyle(
                                         color: Colors.black54,
                                         decoration: TextDecoration.lineThrough)),
                               ),
                               Expanded(
-                                  child: new Text(
+                                  child: Text(
                                     "${formatter.format(widget.product.calcPrice(_storage!, _color!))} VNĐ",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
