@@ -4,12 +4,15 @@ import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/widget_customization/card_customization/favorite_item.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants.dart';
+
 class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
       builder: (context, productsData, _) {
         return Scaffold(
+            backgroundColor: defaultBackgroundColor,
             body: Padding(
           padding: const EdgeInsets.all(10),
           child: productsData.filterFavoriteProduct() == 0

@@ -10,6 +10,7 @@ import 'package:project/providers/orders_provider.dart';
 import 'package:project/providers/users_provider.dart';
 import 'package:project/ui/widget_customization/button_customization/custom_button.dart';
 import 'package:project/ui/widget_customization/card_customization/order_detail_item.dart';
+import 'package:project/ui/widget_customization/text_field_customization/text_field_customization.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
@@ -28,10 +29,12 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
   Random random = new Random();
   int randomNumber = 0;
   bool isCod = true;
+  late var controllerAddress;
 
   @override
   void initState() {
     randomNumber = random.nextInt(10000);
+    controllerAddress = TextEditingController();
     super.initState();
   }
 
@@ -49,12 +52,14 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 10,),
               TextDivider(
                 child: Text(
                   'Information Delivery',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),
               ),
+              SizedBox(height: 5,),
               Consumer<UserProvider>(
                 builder: (context, userData, _) {
                   return Card(
@@ -90,19 +95,13 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                               ),
                             ],
                           ),
-                          Text('Address: ', style: TextStyle(fontSize: 16)),
-                          Container(
-                            padding: EdgeInsets.only(left: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all()),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: '${userData.user.address}',
-                                  hintStyle: TextStyle(color: Colors.black)),
-                            ),
+                          SizedBox(height: 10,),
+                          TextFieldCustomization(
+                            controller: controllerAddress,
+                            isEdit: true,
+                            icon: Icon(CupertinoIcons.placemark),
+                            label: 'Address',
+                            hintText: userData.user.address ?? 'No information yet',
                           ),
                         ],
                       ),
@@ -110,12 +109,14 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                   );
                 },
               ),
+              SizedBox(height: 10,),
               TextDivider(
                 child: Text(
                   'Products',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),
               ),
+              SizedBox(height: 5,),
               OrderDetailItem(itemModel: widget.itemModel),
               SizedBox(
                 height: 10,
@@ -136,12 +137,14 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                   )
                 ],
               ),
+              SizedBox(height: 10,),
               TextDivider(
                 child: Text(
                   'Payment Method',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),
               ),
+              SizedBox(height: 5,),
               ButtonCustomization(
                 textColor: !isCod ? Colors.white : Colors.black,
                 iconData: CupertinoIcons.creditcard,
@@ -179,12 +182,15 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                         color: Colors.black,
                       ),
               ),
+
+              SizedBox(height: 10,),
               TextDivider(
                 child: Text(
                   'Confirm',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),
               ),
+              SizedBox(height: 5,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

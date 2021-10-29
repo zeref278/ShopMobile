@@ -2,14 +2,9 @@ import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/ui/widget_customization/listview_customization/horizontal_listview.dart';
-import 'package:project/providers/cart_provider.dart';
-import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/widget_customization/listview_customization/recent_products_gridview.dart';
-import 'package:project/ui/account_management/account_screen.dart';
-import 'package:project/ui/orders_history/orders_screen.dart';
 import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
-import 'package:provider/provider.dart';
-import 'package:badges/badges.dart';
+
 
 import '../../constants.dart';
 

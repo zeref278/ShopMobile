@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/models/order.dart';
-import 'package:project/ui/widget_customization/card_customization/cart_items.dart';
 
 import '../../constants.dart';
 import '../widget_customization/card_customization/order_detail_item.dart';
@@ -13,6 +12,7 @@ class OrderDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: defaultBackgroundColor,
       appBar: AppBar(
         title: Text(
           'Order Detail',

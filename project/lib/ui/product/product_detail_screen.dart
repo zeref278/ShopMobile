@@ -39,35 +39,37 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(builder: (context, productsData, _){
       return Scaffold(
+        backgroundColor: defaultBackgroundColor,
         appBar: AppBar(
           elevation: 0.1,
           backgroundColor: defaultPrimaryColor,
-          title: Text('Shop Mobile'),
+          title: Text('Product Detail'),
           actions: <Widget>[
-            IconButton(
-                icon: Icon(
-                  CupertinoIcons.search,
+            Container(
+              width: 40, height: 40,
+              decoration: BoxDecoration(
                   color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Consumer<CartProvider>(
-                  builder: (context, cartData, _) {
-                    return Badge(
-                      elevation: 0,
-                      badgeColor: cartData.cart.length == 0
-                          ? Colors.transparent
-                          : Colors.red,
-                      badgeContent: Text(cartData.cart.length == 0
-                          ? ''
-                          : '${cartData.cart.length}'),
-                      child: Icon(CupertinoIcons.cart),
-                    );
-                  },
-                ),
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => CartScreen()))),
-            SizedBox(width: 5)
+                  shape: BoxShape.circle
+              ),
+              child: IconButton(
+                  icon: Consumer<CartProvider>(
+                    builder: (context, cartData, _) {
+                      return Badge(
+                        elevation: 0,
+                        badgeColor: cartData.cart.length == 0
+                            ? Colors.transparent
+                            : Colors.red,
+                        badgeContent: Text(cartData.cart.length == 0
+                            ? ''
+                            : '${cartData.cart.length}'),
+                        child: Icon(CupertinoIcons.cart, color: Colors.black,),
+                      );
+                    },
+                  ),
+                  onPressed: () => Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => CartScreen()))),
+            ),
+            SizedBox(width: 15)
           ],
         ),
         body: SafeArea(
@@ -131,6 +133,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         children: <Widget>[
                           Text('Storage'),
                           DropdownButton(
+                            icon: Icon(CupertinoIcons.chevron_down, size: 18,),
                             //hint: Text('Please choose a location'), // Not necessary for Option 1
                             value: _storage,
                             onChanged: (String? newValue) {
@@ -153,6 +156,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         children: <Widget>[
                           Text('Color'),
                           DropdownButton(
+                            icon: Icon(CupertinoIcons.chevron_down, size: 18,),
                             //hint: Text('Please choose a location'), // Not necessary for Option 1
                             value: _color,
                             onChanged: (String? newValue) {
@@ -177,7 +181,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             children: [
                               IconButton(
                                 disabledColor: Colors.white,
-                                icon: Icon(Icons.remove),
+                                icon: Icon(CupertinoIcons.minus_square),
                                 onPressed: _quantity == 1
                                     ? null
                                     : () {
@@ -192,7 +196,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               ),
                               IconButton(
                                 disabledColor: Colors.white,
-                                icon: Icon(Icons.add),
+                                icon: Icon(CupertinoIcons.plus_square),
                                 onPressed:
                                 _quantity == widget.product.quantityRemaining
                                     ? null
@@ -248,7 +252,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     storage: _storage!));
                               },
                               icon: Icon(CupertinoIcons.cart_badge_plus,
-                                  color: Colors.red));
+                                  color: Colors.red, size: 30,));
                         },
                       ),
 
@@ -262,7 +266,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               productsData.products[widget.index].isFavorite
                                   ? CupertinoIcons.heart_solid
                                   : CupertinoIcons.heart,
-                              color: Colors.red))
+                              color: Colors.red, size: 30,))
                     ],
                   ),
                 ),

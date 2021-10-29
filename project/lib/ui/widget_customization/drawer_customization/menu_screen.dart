@@ -9,6 +9,7 @@ import 'package:project/ui/favorites/favorites_screen.dart';
 import 'package:project/ui/home/home_screen.dart';
 import 'package:project/ui/orders_history/orders_screen.dart';
 import 'package:badges/badges.dart';
+import 'package:project/ui/widget_customization/search_bar_customization/animated_search_bar.dart';
 import 'package:provider/provider.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -19,9 +20,11 @@ class MenuScreen extends StatefulWidget {
 class MenuScreenState extends State<MenuScreen> {
   var currentPage = DrawerSections.homescreen;
   String _currentScreen = 'Shop Mobile';
+  TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     var container;
     if (currentPage == DrawerSections.homescreen) {
       container = HomeScreen();
@@ -44,30 +47,44 @@ class MenuScreenState extends State<MenuScreen> {
           _currentScreen,
         ),
         actions: [
-          IconButton(
-              icon: Icon(
-                CupertinoIcons.search,
+          AnimatedSearchBar(
+            prefixIcon: Icon(CupertinoIcons.search, color: Colors.black,),
+            suffixIcon: Icon(CupertinoIcons.xmark, color: Colors.black,),
+            width: size.width - 65,
+            textController: textController,
+            rtl: true,
+            onSuffixTap: () {
+              setState(() {
+                textController.clear();
+              });
+            },
+          ),
+          SizedBox(width: 10,),
+          Container(
+            width: 40, height: 40,
+            decoration: BoxDecoration(
                 color: Colors.white,
-              ),
-              onPressed: () {}),
-          IconButton(
-              icon: Consumer<CartProvider>(
-                builder: (context, cartData, _) {
-                  return Badge(
-                    elevation: 0,
-                    badgeColor: cartData.cart.length == 0
-                        ? Colors.transparent
-                        : Colors.red,
-                    badgeContent: Text(cartData.cart.length == 0
-                        ? ''
-                        : '${cartData.cart.length}'),
-                    child: Icon(CupertinoIcons.cart),
-                  );
-                },
-              ),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CartScreen()))),
-          SizedBox(width: 5)
+              shape: BoxShape.circle
+            ),
+            child: IconButton(
+                icon: Consumer<CartProvider>(
+                  builder: (context, cartData, _) {
+                    return Badge(
+                      elevation: 0,
+                      badgeColor: cartData.cart.length == 0
+                          ? Colors.transparent
+                          : Colors.red,
+                      badgeContent: Text(cartData.cart.length == 0
+                          ? ''
+                          : '${cartData.cart.length}'),
+                      child: Icon(CupertinoIcons.cart, color: Colors.black,),
+                    );
+                  },
+                ),
+                onPressed: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => CartScreen()))),
+          ),
+          SizedBox(width: 10)
         ],
       ),
       body: container,

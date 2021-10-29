@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:project/constants.dart';
@@ -76,7 +77,7 @@ class _CartItemState extends State<CartItem> {
                             IconButton(
                               disabledColor: Colors.white,
                               icon: Icon(
-                                Icons.remove,
+                                CupertinoIcons.minus_square,
                                 size: 20,
                               ),
                               onPressed: cartData.cart[widget.index].quantity ==
@@ -96,7 +97,7 @@ class _CartItemState extends State<CartItem> {
                             IconButton(
                               disabledColor: Colors.white,
                               icon: Icon(
-                                Icons.add,
+                                CupertinoIcons.plus_square,
                                 size: 20,
                               ),
                               onPressed: cartData.cart[widget.index].quantity ==
@@ -124,7 +125,7 @@ class _CartItemState extends State<CartItem> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.green,
-                                fontSize: 16))
+                                fontSize: 18))
                       ],
                     )
                   ],

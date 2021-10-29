@@ -37,6 +37,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: defaultBackgroundColor,
       appBar: AppBar(
         elevation: 0.1,
         backgroundColor: defaultPrimaryColor,
@@ -46,7 +47,7 @@ class _CartScreenState extends State<CartScreen> {
             builder: (context, cartData, _) {
               return IconButton(
                 disabledColor: defaultPrimaryColor,
-                color: Colors.red,
+                color: Colors.red[700],
                 icon: Icon(
                   CupertinoIcons.clear_fill,
                 ),
@@ -136,7 +137,7 @@ class _CartScreenState extends State<CartScreen> {
                           children: <Widget>[
                             Text(
                               'Total Price: ',
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                             ),
                             Text(
                               '${formatter.format(cartData.calcTotalPrice())} VNĐ',
@@ -148,12 +149,18 @@ class _CartScreenState extends State<CartScreen> {
                             Consumer<OrderProvider>(
                                 builder: (context, orderData, _) {
                               return MaterialButton(
+
                                 onPressed: () => Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) => CheckoutScreen())),
                                 color: Colors.red,
                                 textColor: Colors.white,
-                                elevation: 0.2,
-                                child: Text("Buy Now"),
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text("Buy Now",style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
                               );
                             })
                           ],

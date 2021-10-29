@@ -40,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userData, _) {
       return Scaffold(
+        backgroundColor: defaultBackgroundColor,
         floatingActionButton: FloatingActionButton(
           elevation: 10,
           backgroundColor: isEditMode ? defaultPrimaryColor : Colors.blue,
