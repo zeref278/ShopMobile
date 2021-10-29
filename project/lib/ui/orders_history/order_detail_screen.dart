@@ -20,11 +20,12 @@ class OrderDetailScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: defaultPrimaryColor,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               child: Flexible(
@@ -33,7 +34,8 @@ class OrderDetailScreen extends StatelessWidget {
                   itemCount: order.listItem.length,
                   itemBuilder: (BuildContext context, int index) {
                     return OrderDetailItem(
-                      itemModel: order.listItem[index],);
+                      itemModel: order.listItem[index],
+                    );
                   },
                 ),
               ),
@@ -41,6 +43,48 @@ class OrderDetailScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Time Order: ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600, color: Colors.black),
+                ),
+                Text(
+                  order.timeOrder,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.teal),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Payment Method: ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600, color: Colors.black),
+                ),
+                Text(
+                  order.paymentMethod,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.teal),
+                )
+              ],
+            ),
+            SizedBox(height: 20,),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: Row(
@@ -57,7 +101,6 @@ class OrderDetailScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.deepOrange),
                   ),
-
                 ],
               ),
             ),

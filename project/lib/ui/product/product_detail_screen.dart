@@ -6,6 +6,7 @@ import 'package:project/models/cart_item_model.dart';
 import 'package:project/models/product.dart';
 import 'package:project/providers/cart_provider.dart';
 import 'package:project/ui/cart/cart_screen.dart';
+import 'package:project/ui/checkout/checkout_one_item.dart';
 import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
 import 'package:provider/provider.dart';
 
@@ -48,11 +49,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               onPressed: () {}),
           IconButton(
               icon: Consumer<CartProvider>(
-                builder:(context, cartData, _) {
+                builder: (context, cartData, _) {
                   return Badge(
                     elevation: 0,
-                    badgeColor: cartData.cart.length == 0 ? Colors.transparent : Colors.red,
-                    badgeContent: Text(cartData.cart.length == 0 ? '' : '${cartData.cart.length}'),
+                    badgeColor: cartData.cart.length == 0
+                        ? Colors.transparent
+                        : Colors.red,
+                    badgeContent: Text(cartData.cart.length == 0
+                        ? ''
+                        : '${cartData.cart.length}'),
                     child: Icon(CupertinoIcons.cart),
                   );
                 },
@@ -215,13 +220,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     //======The size button
                     Expanded(
                         child: MaterialButton(
-                      onPressed: () {
-
-                      },
-                      color: Colors.red,
-                      textColor: Colors.white,
-                      elevation: 0.2,
-                      child: Text("Buy now"),
+                          onPressed: () =>
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CheckoutOneItemScreen(
+                                    itemModel: CartItemModel(
+                                        storage: _storage!,
+                                        quantity: _quantity,
+                                        product: widget.product,
+                                        color: _color!),
+                                  ))),
+                          color: Colors.red,
+                          textColor: Colors.white,
+                          elevation: 0.2,
+                          child: Text("Buy now"),
                     )),
                     Consumer<CartProvider>(
                       builder: (context, cartData, _) {
@@ -233,10 +244,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   color: _color!,
                                   storage: _storage!));
                             },
-                            icon: Icon(Icons.add_shopping_cart, color: Colors.red));
+                            icon: Icon(CupertinoIcons.cart_badge_plus,
+                                color: Colors.red));
                       },
                     ),
-                    
+
                     IconButton(
                         onPressed: () {
                           setState(() {
@@ -245,8 +257,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         },
                         icon: Icon(
                             _isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
+                                ? CupertinoIcons.heart_solid
+                                : CupertinoIcons.heart,
                             color: Colors.red))
                   ],
                 ),

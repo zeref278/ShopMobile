@@ -3,8 +3,9 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project/models/cart_item_model.dart';
 import 'package:project/models/order.dart';
-import 'package:project/providers/cart_provider.dart';
+
 import 'package:project/providers/orders_provider.dart';
 import 'package:project/providers/users_provider.dart';
 import 'package:project/ui/widget_customization/button_customization/custom_button.dart';
@@ -14,13 +15,16 @@ import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../widget_customization/divider_customization/text_divider.dart';
 
-class CheckoutScreen extends StatefulWidget {
+class CheckoutOneItemScreen extends StatefulWidget {
+  final CartItemModel itemModel;
+
+  CheckoutOneItemScreen({required this.itemModel});
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState();
+  State<CheckoutOneItemScreen> createState() => _CheckoutOneItemScreenState();
 }
 
-class _CheckoutScreenState extends State<CheckoutScreen> {
+class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
   Random random = new Random();
   int randomNumber = 0;
   bool isCod = true;
@@ -112,15 +116,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),
               ),
-              Consumer<CartProvider>(
-                builder: (context, cartData, _) {
-                  return Column(
-                    children: cartData.cart.map((element) {
-                      return OrderDetailItem(itemModel: element);
-                    }).toList(),
-                  );
-                },
-              ),
+              OrderDetailItem(itemModel: widget.itemModel),
               SizedBox(
                 height: 10,
               ),
@@ -131,17 +127,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     'Total Price: ',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                   ),
-                  Consumer<CartProvider>(
-                    builder: (context, cartData, _) {
-                      return Text(
-                        '${formatter.format(cartData.calcTotalPrice())} VNĐ',
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange),
-                      );
-                    },
-                  ),
+                  Text(
+                    '${formatter.format(widget.itemModel.getCartItemPrice())} VNĐ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange),
+                  )
                 ],
               ),
               TextDivider(
@@ -212,82 +204,77 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       Navigator.pop(context);
                     },
                   ),
-                  Consumer<CartProvider>(
-                    builder: (context, cartData, _) {
-                      return Consumer<OrderProvider>(
-                          builder: (context, orderData, _) {
-                        return MaterialButton(
-                          onPressed: () {
-                            orderData.addOrder(Order(
-                                timeOrder: DateFormat('dd/MM/yyyy kk:mm:ss').format(DateTime.now()),
-                                paymentMethod: isCod ? 'COD' : 'Credit Card',
-                                status: 1,
-                                listItem: List.from(cartData.cart),
-                                totalPrice: cartData.calcTotalPrice(),
-                                id: 'order' + '$randomNumber'));
-                            cartData.clearAll();
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      "Notification",
-                                      style: TextStyle(fontSize: 18),
+                  Consumer<OrderProvider>(builder: (context, orderData, _) {
+                    return MaterialButton(
+                      onPressed: () {
+                        orderData.addOrder(Order(
+                            status: 1,
+                            timeOrder: DateFormat('dd/MM/yyyy kk:mm:ss').format(DateTime.now()),
+                            paymentMethod: isCod ? 'COD' : 'Credit Card',
+                            listItem: [widget.itemModel],
+                            totalPrice: widget.itemModel.getCartItemPrice(),
+                            id: 'order' + '$randomNumber'));
+
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(
+                                  "Notification",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                content: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(
+                                      CupertinoIcons.sun_min,
+                                      size: 30,
+                                      color: Colors.yellow,
                                     ),
-                                    content: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(
-                                          CupertinoIcons.sun_min,
-                                          size: 30,
-                                          color: Colors.yellow,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          "Order successful !",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.green,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ],
+                                    SizedBox(
+                                      width: 5,
                                     ),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text(
-                                            "OK",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          )),
-                                    ],
-                                  );
-                                });
-                          },
-                          color: Colors.green,
-                          textColor: Colors.white,
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            'ORDER',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        );
-                      });
-                    },
-                  ),
+                                    Text(
+                                      "Order successful !",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "OK",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )),
+                                ],
+                              );
+                            });
+                      },
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        'ORDER',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    );
+                  })
                 ],
               ),
             ],
