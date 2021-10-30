@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/product/product_detail_screen.dart';
@@ -94,6 +95,35 @@ class FavoriteItem extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.grey,
                                 decoration: TextDecoration.lineThrough),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              RatingBar(
+                                allowHalfRating: true,
+                                initialRating: productsData.products[index].getRating(),
+                                itemSize: 15,
+                                ignoreGestures: true,
+                                onRatingUpdate: (double value) {},
+                                ratingWidget: RatingWidget(
+                                  full: Icon(
+                                    CupertinoIcons.star_fill,
+                                    color: Colors.amber,
+                                  ),
+                                  half: Icon(CupertinoIcons.star_lefthalf_fill,
+                                      color: Colors.amber),
+                                  empty: Icon(CupertinoIcons.star_fill,
+                                      color: Colors.grey),
+                                ),
+                              ),
+                              SizedBox(width: 5,),
+                              Text(
+                                '(${productsData.products[index].feedbacks.length})',
+                                style: TextStyle(fontSize: 12, color: Colors.grey),
+                              )
+                            ],
                           ),
                         ],
                       ),

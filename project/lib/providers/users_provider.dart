@@ -6,7 +6,7 @@ class UserProvider with ChangeNotifier {
   User get user => _demoUser;
 
   User _demoUser = User(
-    idUser: 02,
+    idUser: 01,
     userName: 'Tran Linh',
     email: 'linhtranttdl@gmail.com',
     address: 'Da Nang',
@@ -31,4 +31,5 @@ class UserProvider with ChangeNotifier {
         dateOfBirth == '' ? _demoUser.dateOfBirth : dateOfBirth;
     notifyListeners();
   }
+
 }

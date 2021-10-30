@@ -62,6 +62,7 @@ class OrderProvider with ChangeNotifier {
 //Only use for sample order history
 List listProduct = [
   Product(
+      feedbacks: [],
       isFavorite: false,
       name: 'Huawei Mix',
       price: 15000000,
@@ -85,6 +86,7 @@ List listProduct = [
         'Blue': '500000',
       }),
   Product(
+      feedbacks: [],
       isFavorite: false,
       name: 'Iphone 12',
       price: 25000000,
@@ -108,6 +110,7 @@ List listProduct = [
         'Blue': '500000',
       }),
   Product(
+      feedbacks: [],
       isFavorite: false,
       name: 'Iphone 11',
       price: 25000000,
@@ -131,6 +134,7 @@ List listProduct = [
         'Blue': '500000',
       }),
   Product(
+      feedbacks: [],
       isFavorite: false,
       name: 'Samsung',
       price: 25000000,
@@ -154,6 +158,7 @@ List listProduct = [
         'Blue': '500000',
       }),
   Product(
+      feedbacks: [],
       isFavorite: false,
       name: 'Iphone 13',
       price: 25000000,
@@ -177,6 +182,8 @@ List listProduct = [
         'Blue': '500000',
       }),
   Product(
+
+      feedbacks: [],
       isFavorite: false,
       name: 'Samsung Galaxy ...',
       price: 25000000,

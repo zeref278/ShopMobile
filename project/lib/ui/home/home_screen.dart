@@ -1,7 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project/ui/widget_customization/listview_customization/horizontal_listview.dart';
+import 'package:project/ui/widget_customization/count_down_timer.dart';
+import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_flash_sale.dart';
 import 'package:project/ui/widget_customization/listview_customization/recent_products_gridview.dart';
 import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
 
@@ -59,7 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AnimatedTextKit(repeatForever: true, animatedTexts: [
+                AnimatedTextKit(
+                  pause: Duration(milliseconds: 500),
+                    repeatForever: true, animatedTexts: [
                   ColorizeAnimatedText('Flash Sale',
                       textStyle: TextStyle(
                           fontFamily: 'Catamaran',
@@ -76,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           //horizontal list view begins here
           Container(
-              height: 200,
+              height: 215,
               decoration: BoxDecoration(),
               child: HorizontalList()),
           //HorizontalList(),
@@ -89,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           //Grid view
           Container(
-            //height: ,
             child: RecentProductsGridview(),
           )
         ],
