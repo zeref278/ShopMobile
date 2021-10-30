@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project/constants.dart';
 
 import 'package:project/providers/products_provider.dart';
@@ -29,7 +32,8 @@ class ProductItem extends StatelessWidget {
         ),
         child: Card(
           elevation: 10,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8)),
           child: Padding(
             padding: const EdgeInsets.only(top: 5, bottom: 5),
             child: Column(
@@ -38,14 +42,16 @@ class ProductItem extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image(
-                      image: AssetImage(productsData.products[index].picturePath),
+                      image: AssetImage(
+                          productsData.products[index].picturePath),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Text(
                   productsData.products[index].name,
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
                 SizedBox(
                   height: 5,
@@ -56,16 +62,50 @@ class ProductItem extends StatelessWidget {
                   runSpacing: 5,
                   children: <Widget>[
                     Text(
-                      formatter.format(productsData.products[index].price) + ' VNĐ',
+                      formatter.format(productsData.products[index].price) +
+                          ' VNĐ',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.red),
                     ),
                     Text(
-                      formatter.format(productsData.products[index].oldPrice) + ' VNĐ',
+                      formatter.format(
+                              productsData.products[index].oldPrice) +
+                          ' VNĐ',
                       style: TextStyle(
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough),
                     ),
+                  ],
+                ),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RatingBar(
+                      allowHalfRating: true,
+                      initialRating:
+                          productsData.products[index].getRating(),
+                      itemSize: 15,
+                      ignoreGestures: true,
+                      onRatingUpdate: (double value) {},
+                      ratingWidget: RatingWidget(
+                        full: Icon(
+                          CupertinoIcons.star_fill,
+                          color: Colors.amber,
+                        ),
+                        half: Icon(CupertinoIcons.star_lefthalf_fill,
+                            color: Colors.amber),
+                        empty: Icon(CupertinoIcons.star_fill,
+                            color: Colors.grey),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '(${productsData.products[index].feedbacks.length})',
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    )
                   ],
                 ),
               ],
