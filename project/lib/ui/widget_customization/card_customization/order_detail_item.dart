@@ -39,6 +39,10 @@ class OrderDetailItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
+                        itemModel.product.category,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
                         itemModel.product.name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),

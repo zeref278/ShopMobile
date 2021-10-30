@@ -4,7 +4,7 @@ import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/widget_customization/card_customization/flash_sale_item.dart';
 import 'package:provider/provider.dart';
 
-class HorizontalList extends StatelessWidget {
+class HorizontalListviewFlashsale extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(builder: (context, productsData, _) {

@@ -3,6 +3,7 @@ import 'package:project/models/feedback.dart';
 class Product {
   //Attribute
   //int numberSold;
+  String productID;
   String name;
   String category;
   int price;
@@ -49,7 +50,7 @@ class Product {
 
   //Constructor
   Product(
-      {//required this.numberSold,
+      {required this.productID,
       required this.feedbacks,
       required this.isFavorite,
       required this.name,

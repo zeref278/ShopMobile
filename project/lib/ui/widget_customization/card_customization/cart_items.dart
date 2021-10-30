@@ -30,7 +30,7 @@ class _CartItemState extends State<CartItem> {
           IconSlideAction(
             caption: 'Delete',
             color: Colors.red,
-            icon: Icons.delete,
+            icon: CupertinoIcons.trash,
             onTap: widget.onPressedDelete,
           ),
         ],
@@ -61,6 +61,10 @@ class _CartItemState extends State<CartItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Text(
+                            cartData.cart[widget.index].product.category,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(
                             cartData.cart[widget.index].product.name,
                             style: TextStyle(fontWeight: FontWeight.bold),

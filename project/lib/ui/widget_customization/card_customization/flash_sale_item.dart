@@ -42,7 +42,6 @@ class FlashSaleItem extends StatelessWidget {
                     width: 100,
                     height: 100,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
                       child: Image(
                         image: AssetImage(
                             productsData.products[index].picturePath),
@@ -53,6 +52,11 @@ class FlashSaleItem extends StatelessWidget {
                   Container(
                     child: Column(
                       children: <Widget>[
+                        Text(
+                          productsData.products[index].category,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600,),
+                        ),
                         Text(
                           productsData.products[index].name,
                           style: TextStyle(

@@ -25,7 +25,7 @@ class FavoriteItem extends StatelessWidget {
           IconSlideAction(
             caption: 'Delete',
             color: Colors.red,
-            icon: Icons.delete,
+            icon: CupertinoIcons.trash,
             onTap: onPressedDelete,
           ),
         ],
@@ -55,7 +55,6 @@ class FavoriteItem extends StatelessWidget {
                       width: 130,
                       height: 130,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
                         child: Image(
                           image: AssetImage(productsData.products[index].picturePath),
                           fit: BoxFit.cover,
@@ -68,6 +67,11 @@ class FavoriteItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            productsData.products[index].category,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 16),
+                          ),
                           Container(
                             child: Text(
                               productsData.products[index].name,
@@ -129,7 +133,7 @@ class FavoriteItem extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(CupertinoIcons.heart_solid, color: Colors.red,),
+                      icon: Icon(CupertinoIcons.heart_solid, color: defaultPrimaryColor,),
                       onPressed: () {},
                     )
                   ],
