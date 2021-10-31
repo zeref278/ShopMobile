@@ -9,7 +9,7 @@ Feature:
  + Flash Sale:              DONE (issue: not control count down finish)
  + Rating-Review:           DONE
  + Parity product:          DONE
- + Search:                  x (animated: done ---- Search Engine: non)
+ + Search:                  DONE (???????????)
  + Filter by Category:      DONE (issue: Category Other)
  + See all product:         DONE (issue: filter)
  + Sort price:              DONE
