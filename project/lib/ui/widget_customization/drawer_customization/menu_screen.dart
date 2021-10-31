@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/constants.dart';
 import 'package:project/providers/cart_provider.dart';
+import 'package:project/providers/products_provider.dart';
 import 'package:project/providers/users_provider.dart';
-import 'package:project/ui/account_management/account_screen.dart';
+import 'package:project/ui/account_management/profile_screen.dart';
 import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/favorites/favorites_screen.dart';
 import 'package:project/ui/home/home_screen.dart';
 import 'package:project/ui/orders_history/orders_screen.dart';
 import 'package:badges/badges.dart';
+import 'package:project/ui/search_result/search_result_screen.dart';
 import 'package:project/ui/widget_customization/search_bar_customization/animated_search_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +23,12 @@ class MenuScreenState extends State<MenuScreen> {
   var currentPage = DrawerSections.homescreen;
   String _currentScreen = 'Shop Mobile';
   TextEditingController textController = TextEditingController();
+
+  // Widget suggestion = SizedBox(
+  //   width: 0,
+  //   height: 0,
+  // );
+  // List<Product> listSuggestion = [];
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +55,63 @@ class MenuScreenState extends State<MenuScreen> {
           _currentScreen,
         ),
         actions: [
-          AnimatedSearchBar(
-            prefixIcon: Icon(CupertinoIcons.search, color: Colors.black,),
-            suffixIcon: Icon(CupertinoIcons.xmark, color: Colors.black,),
-            width: size.width - 65,
-            textController: textController,
-            rtl: true,
-            onSuffixTap: () {
-              setState(() {
-                textController.clear();
-              });
+          Consumer<ProductProvider>(
+            builder: (context, productsData, _) {
+              return AnimatedSearchBar(
+                prefixIcon: Icon(
+                  CupertinoIcons.search,
+                  color: Colors.black,
+                ),
+                suffixIcon: Icon(
+                  CupertinoIcons.xmark,
+                  color: Colors.black,
+                ),
+                width: (size.width - 65) > 0 ? size.width - 65 : 150,
+                textController: textController,
+                rtl: true,
+                onSuffixTap: () {
+                  setState(() {
+                    textController.clear();
+                  });
+                },
+                // onChanged: (String value) {
+                //   listSuggestion.clear();
+                //   if (value != '' && value != '\n') {
+                //     listSuggestion =
+                //         productsData.filterProductByName(value);
+                //     setState(() {
+                //       suggestion = Column(
+                //         children: listSuggestion
+                //             .map((product) => ProductItem(
+                //           width: size.width - 65,
+                //                 product: product, isGrid: false))
+                //             .toList(),
+                //       );
+                //     });
+                //   }
+                // },
+                onSubmitted: (String value) {
+                  if (value != '' && value != '\n') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SearchResultScreen(
+                                strValue: value,
+                              )),
+                    );
+                  }
+                },
+              );
             },
           ),
-          SizedBox(width: 10,),
+          SizedBox(
+            width: 10,
+          ),
           Container(
-            width: 40, height: 40,
-            decoration: BoxDecoration(
-                color: Colors.white,
-              shape: BoxShape.circle
-            ),
+            width: 40,
+            height: 40,
+            decoration:
+                BoxDecoration(color: Colors.white, shape: BoxShape.circle),
             child: IconButton(
                 icon: Consumer<CartProvider>(
                   builder: (context, cartData, _) {
@@ -77,17 +123,35 @@ class MenuScreenState extends State<MenuScreen> {
                       badgeContent: Text(cartData.cart.length == 0
                           ? ''
                           : '${cartData.cart.length}'),
-                      child: Icon(CupertinoIcons.cart, color: Colors.black,),
+                      child: Icon(
+                        CupertinoIcons.cart,
+                        color: Colors.black,
+                      ),
                     );
                   },
                 ),
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => CartScreen()))),
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CartScreen()))),
           ),
           SizedBox(width: 10)
         ],
       ),
-      body: container,
+      body: Stack(
+        children: [
+          container,
+          // Positioned(
+          //     top: 0,
+          //     left: 0,
+          //     child: Container(
+          //       padding: EdgeInsets.all(10),
+          //       decoration: BoxDecoration(
+          //         color: Colors.white
+          //       ),
+          //       child: suggestion,
+          //     ))
+        ],
+      ),
+
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Container(

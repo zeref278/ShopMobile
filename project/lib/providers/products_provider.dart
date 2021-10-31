@@ -613,6 +613,17 @@ class ProductProvider with ChangeNotifier {
     return count;
   }
 
+  List<Product> filterProductByName(String name) {
+    List<Product> result = [];
+    _products.forEach((element) {
+      if (element.name.toUpperCase().startsWith(name.toUpperCase()) ||
+          element.category.toUpperCase().startsWith(name.toUpperCase())) {
+        result.add(element);
+      }
+    });
+    return result;
+  }
+
   List<Product> filterProductByCategory(String category) {
     List<Product> result = [];
     _products.forEach((element) {
@@ -624,10 +635,10 @@ class ProductProvider with ChangeNotifier {
   }
 
   List<Product> filterProductByParityPrice(Product product, int epsilon) {
-
     List<Product> result = [];
     _products.forEach((element) {
-      if ((element.price - product.price).abs() <= epsilon && element.productID != product.productID ) {
+      if ((element.price - product.price).abs() <= epsilon &&
+          element.productID != product.productID) {
         result.add(element);
       }
     });

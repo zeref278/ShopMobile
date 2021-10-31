@@ -9,13 +9,15 @@ class TextFieldCustomization extends StatelessWidget {
   final TextEditingController? controller;
   final void Function()? onTap;
   final bool isExpand;
+  final TextInputType? inputType;
 
   TextFieldCustomization(
       {this.icon,
       required this.label,
       required this.hintText,
       required this.isEdit,
-        this.isExpand = false,
+      this.isExpand = false,
+      this.inputType,
       this.onTap,
       this.controller});
 
@@ -24,7 +26,8 @@ class TextFieldCustomization extends StatelessWidget {
     return Directionality(
         textDirection: TextDirection.ltr,
         child: TextField(
-          maxLines: 4,
+          keyboardType: inputType,
+          maxLines: isExpand ? 4 : 1,
           onTap: onTap,
           controller: controller,
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.teal),

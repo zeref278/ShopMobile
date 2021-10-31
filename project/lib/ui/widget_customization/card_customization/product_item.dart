@@ -12,10 +12,12 @@ import 'package:provider/provider.dart';
 class ProductItem extends StatelessWidget {
   final Product product;
   final bool isGrid;
+  final double? width;
 
   ProductItem({
     required this.product,
     required this.isGrid,
+    this.width
   });
 
   @override
@@ -124,7 +126,7 @@ class ProductItem extends StatelessWidget {
                 ),
               )
             : Container(
-                width: size.width,
+                width: width ?? size.width,
                 height: 150,
                 child: Card(
                   elevation: 10,

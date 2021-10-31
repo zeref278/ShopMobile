@@ -30,6 +30,8 @@ class AnimatedSearchBar extends StatefulWidget {
   final bool closeSearchOnSuffixTap;
   final Color? color;
   final List<TextInputFormatter>? inputFormatters;
+  final void Function(String)? onSubmitted;
+  final void Function(String)? onChanged;
 
   const AnimatedSearchBar({
     Key? key,
@@ -55,6 +57,11 @@ class AnimatedSearchBar extends StatefulWidget {
 
     /// make the keyboard to show automatically when the searchbar is expanded
     this.autoFocus = false,
+
+    /// handle search after click button on keyboard
+    this.onSubmitted,
+
+    this.onChanged,
 
     /// TextStyle of the contents inside the searchbar
     this.style,
@@ -213,6 +220,8 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar>
                         toggle = 0;
                       });
                     },
+                    onChanged: widget.onChanged,
+                    onSubmitted: widget.onSubmitted,
 
                     ///style is of type TextStyle, the default is just a color black
                     style: widget.style != null

@@ -3,7 +3,7 @@ import 'package:carousel_pro_nullsafety/carousel_pro_nullsafety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/ui/product/all_products_screen.dart';
-import 'package:project/ui/widget_customization/count_down_timer.dart';
+import 'package:project/ui/widget_customization/count_down_timer/count_down_timer.dart';
 import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_categories.dart';
 import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_flash_sale.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_gridview.dart';

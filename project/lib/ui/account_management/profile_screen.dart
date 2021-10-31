@@ -16,11 +16,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late bool isEditMode;
-  late var controllerName;
-  late var controllerEmail;
-  late var controllerPhone;
-  late var controllerDate;
-  late var controllerAddress;
+  late TextEditingController controllerName;
+  late TextEditingController controllerEmail;
+  late TextEditingController controllerPhone;
+  late TextEditingController controllerDate;
+  late TextEditingController controllerAddress;
 
   @override
   void initState() {
@@ -121,6 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 15,
                 ),
                 TextFieldCustomization(
+                  inputType: TextInputType.name,
                   controller: controllerName,
                   isEdit: isEditMode,
                   icon: Icon(CupertinoIcons.person),
@@ -131,6 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 15,
                 ),
                 TextFieldCustomization(
+                  inputType: TextInputType.emailAddress,
                   controller: controllerEmail,
                   isEdit: isEditMode,
                   icon: Icon(CupertinoIcons.mail),
@@ -141,6 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 15,
                 ),
                 TextFieldCustomization(
+                  inputType: TextInputType.phone,
                   controller: controllerPhone,
                   isEdit: isEditMode,
                   icon: Icon(CupertinoIcons.phone),
@@ -203,6 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 15,
                 ),
                 TextFieldCustomization(
+                  inputType: TextInputType.datetime,
                   controller: controllerDate,
                   isEdit: isEditMode,
                   icon: Icon(CupertinoIcons.calendar),
@@ -223,5 +227,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             )),
       );
     });
+  }
+  @override
+  void dispose() {
+    controllerName.dispose();
+    controllerEmail.dispose();
+    controllerPhone.dispose();
+
+    controllerDate.dispose();
+    controllerAddress.dispose();
+    super.dispose();
   }
 }

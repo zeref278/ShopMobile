@@ -303,8 +303,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, bottom: 20, top: 10),
                   child: Container(
                       height: 230,
                       child: HorizontalListviewParityProduct(

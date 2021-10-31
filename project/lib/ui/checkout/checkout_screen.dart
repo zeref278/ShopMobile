@@ -9,6 +9,7 @@ import 'package:project/providers/orders_provider.dart';
 import 'package:project/providers/users_provider.dart';
 import 'package:project/ui/widget_customization/button_customization/custom_button.dart';
 import 'package:project/ui/widget_customization/card_customization/order_detail_item.dart';
+import 'package:project/ui/widget_customization/text_field_customization/text_field_customization.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
@@ -24,10 +25,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Random random = new Random();
   int randomNumber = 0;
   bool isCod = true;
+  late TextEditingController controllerAddress;
 
   @override
   void initState() {
     randomNumber = random.nextInt(10000);
+    controllerAddress = TextEditingController();
     super.initState();
   }
 
@@ -86,19 +89,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ],
                           ),
-                          Text('Address: ', style: TextStyle(fontSize: 16)),
-                          Container(
-                            padding: EdgeInsets.only(left: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all()),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: '${userData.user.address}',
-                                  hintStyle: TextStyle(color: Colors.black)),
-                            ),
+                          SizedBox(height: 10,),
+                          TextFieldCustomization(
+                            controller: controllerAddress,
+                            isEdit: true,
+                            icon: Icon(CupertinoIcons.placemark),
+                            label: 'Address',
+                            hintText: userData.user.address ?? 'No information yet',
                           ),
                         ],
                       ),
