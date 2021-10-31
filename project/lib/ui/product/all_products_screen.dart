@@ -18,6 +18,7 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   TextEditingController textController = TextEditingController();
   bool isGridMode = true;
+  String isSort = 'none';
 
   @override
   Widget build(BuildContext context) {
@@ -83,20 +84,41 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
       body: Consumer<ProductProvider>(
         builder: (context, productsData, _) {
           return SingleChildScrollView(
-            padding: EdgeInsets.all(10 ),
+            padding: EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(CupertinoIcons.line_horizontal_3_decrease, size: 30,),
-                      onPressed: () {},
+                      icon: (isSort == 'none' || isSort == 'descending')
+                          ? Icon(
+                              CupertinoIcons.sort_up,
+                              size: 30,
+                            )
+                          : Icon(
+                              CupertinoIcons.sort_down,
+                              size: 30,
+                            ),
+                      onPressed: () {
+                        setState(() {
+                          if (isSort == 'none') {
+                            isSort = 'ascending';
+                          } else if (isSort == 'ascending') {
+                            isSort = 'descending';
+                          } else if (isSort == 'descending') {
+                            isSort = 'ascending';
+                          }
+                        });
+                      },
                     ),
                     IconButton(
-                      icon: Icon(isGridMode
-                          ? CupertinoIcons.square_split_1x2
-                          : CupertinoIcons.square_grid_2x2, size: 30,),
+                      icon: Icon(
+                        isGridMode
+                            ? CupertinoIcons.square_split_1x2
+                            : CupertinoIcons.square_grid_2x2,
+                        size: 30,
+                      ),
                       onPressed: () {
                         setState(() {
                           isGridMode = !isGridMode;
@@ -106,7 +128,13 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                   ],
                 ),
                 SizedBox(height: 10),
-                isGridMode? ProductsGridview(): ProductsListview(),
+                isGridMode
+                    ? ProductsGridview(
+                        isSort: isSort,
+                      )
+                    : ProductsListview(
+                        isSort: isSort,
+                      ),
               ],
             ),
           );

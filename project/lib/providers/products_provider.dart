@@ -616,10 +616,35 @@ class ProductProvider with ChangeNotifier {
   List<Product> filterProductByCategory(String category) {
     List<Product> result = [];
     _products.forEach((element) {
-      if(element.category == category) {
+      if (element.category == category) {
         result.add(element);
       }
     });
+    return result;
+  }
+
+  List<Product> filterProductByParityPrice(Product product, int epsilon) {
+
+    List<Product> result = [];
+    _products.forEach((element) {
+      if ((element.price - product.price).abs() <= epsilon && element.productID != product.productID ) {
+        result.add(element);
+      }
+    });
+    return result;
+  }
+
+  List<Product> sortAllProducts(bool isSortAscending) {
+    List<Product> result = List.from(_products);
+
+    if (isSortAscending) {
+      result.sort((firstElement, secondElement) =>
+          (firstElement.price > secondElement.price) ? 1 : 0);
+    } else {
+      result.sort((firstElement, secondElement) =>
+          (firstElement.price > secondElement.price) ? 0 : 1);
+    }
+
     return result;
   }
 

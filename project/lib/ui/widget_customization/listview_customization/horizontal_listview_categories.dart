@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/models/category_model.dart';
+import 'package:project/ui/product/all_products_screen.dart';
 import 'package:project/ui/widget_customization/card_customization/category_item.dart';
 
 class HorizontalListviewCategories extends StatelessWidget {
@@ -31,7 +32,14 @@ class HorizontalListviewCategories extends StatelessWidget {
             category: CategoryModel(
                 logoPath: 'assets/cats/logo_vivo.jpg', name: 'Vivo')),
         InkWell(
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return AllProductsScreen();
+                },
+              ),
+            ),
             child: Container(
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(15)),
@@ -39,7 +47,7 @@ class HorizontalListviewCategories extends StatelessWidget {
                 child: Card(
                   elevation: 10,
                   child: Center(
-                    child: Text('Other', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepPurpleAccent),),
+                    child: Text('See all', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepPurple),),
                   ),
                 )))
       ],

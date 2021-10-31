@@ -14,6 +14,7 @@ import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/checkout/checkout_one_item.dart';
 import 'package:project/ui/widget_customization/card_customization/feedback_item.dart';
 import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
+import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_parity_product.dart';
 import 'package:project/ui/widget_customization/text_field_customization/text_field_customization.dart';
 import 'package:provider/provider.dart';
 
@@ -294,6 +295,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ))
                     ],
                   ),
+                ),
+                TextDivider(
+                  child: Text(
+                    "Parity Products",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
+                  child: Container(
+                      height: 230,
+                      child: HorizontalListviewParityProduct(
+                        product: productsData.products[widget.index],
+                      )),
                 ),
                 TextDivider(
                   child: Text(

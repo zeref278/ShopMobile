@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project/constants.dart';
+import 'package:project/models/product.dart';
 import 'package:project/providers/cart_provider.dart';
 
 import 'package:project/providers/products_provider.dart';
@@ -9,15 +10,19 @@ import 'package:project/ui/product/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
-  final int index;
+  final Product product;
   final bool isGrid;
 
-  ProductItem({required this.index, required this.isGrid});
+  ProductItem({
+    required this.product,
+    required this.isGrid,
+  });
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Consumer<ProductProvider>(builder: (context, productsData, _) {
+      int index = productsData.getIndexByProduct(product);
       return GestureDetector(
         onTap: () => Navigator.push(
           context,

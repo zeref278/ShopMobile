@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project/models/product.dart';
 import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/product/product_detail_screen.dart';
 import 'package:provider/provider.dart';
@@ -9,15 +10,16 @@ import '../../../constants.dart';
 
 class FlashSaleItem extends StatelessWidget {
   final double width;
-  final int index;
+  final Product product;
 
-  const FlashSaleItem({Key? key, required this.width, required this.index})
+  const FlashSaleItem({Key? key, required this.width, required this.product})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
       builder: (context, productsData, _) {
+        int index = productsData.getIndexByProduct(product);
         return GestureDetector(
           onTap: () => Navigator.push(
             context,

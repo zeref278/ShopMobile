@@ -4,10 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/ui/product/all_products_screen.dart';
 import 'package:project/ui/widget_customization/count_down_timer.dart';
-import 'package:project/ui/widget_customization/listview_customization/horiontal_listview_categories.dart';
+import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_categories.dart';
 import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_flash_sale.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_gridview.dart';
-import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_listview.dart';
 
 import '../../constants.dart';
@@ -42,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
-    Size size = MediaQuery.of(context).size;
     const colorizeColors = [
       Colors.purple,
       Colors.blue,
@@ -130,24 +128,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          // IconButton(
-          //   icon: Icon(isGridMode
-          //       ? CupertinoIcons.square_split_1x2
-          //       : CupertinoIcons.square_grid_2x2, size: 30,),
-          //   onPressed: () {
-          //     setState(() {
-          //       isGridMode = !isGridMode;
-          //     });
-          //   },
-          // ),
-
           //Grid view
           Container(
             child: isGridMode
                 ? ProductsGridview(
+                    isSort: 'none',
                     length: 10,
                   )
                 : ProductsListview(
+                    isSort: 'none',
                     length: 10,
                   ),
           )

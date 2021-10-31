@@ -25,6 +25,7 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   TextEditingController textController = TextEditingController();
   bool isGridMode = true;
+  String isSort = 'none';
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +98,26 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(
-                        CupertinoIcons.line_horizontal_3_decrease,
-                        size: 30,
-                      ),
-                      onPressed: () {},
+                      icon: (isSort == 'none' || isSort == 'descending')
+                          ? Icon(
+                              CupertinoIcons.sort_up,
+                              size: 30,
+                            )
+                          : Icon(
+                              CupertinoIcons.sort_down,
+                              size: 30,
+                            ),
+                      onPressed: () {
+                        setState(() {
+                          if (isSort == 'none') {
+                            isSort = 'ascending';
+                          } else if (isSort == 'ascending') {
+                            isSort = 'descending';
+                          } else if (isSort == 'descending') {
+                            isSort = 'ascending';
+                          }
+                        });
+                      },
                     ),
                     IconButton(
                       icon: Icon(
@@ -121,9 +137,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 SizedBox(height: 10),
                 isGridMode
                     ? ProductsGridview(
+                        isSort: isSort,
                         nameCategory: widget.category.name,
                       )
-                    : ProductsListview(nameCategory: widget.category.name,),
+                    : ProductsListview(
+                        isSort: isSort,
+                        nameCategory: widget.category.name,
+                      ),
               ],
             ),
           );
