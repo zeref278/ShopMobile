@@ -616,8 +616,8 @@ class ProductProvider with ChangeNotifier {
   List<Product> filterProductByName(String name) {
     List<Product> result = [];
     _products.forEach((element) {
-      if (element.name.toUpperCase().startsWith(name.toUpperCase()) ||
-          element.category.toUpperCase().startsWith(name.toUpperCase())) {
+      if (element.name.toUpperCase().contains(name.toUpperCase()) ||
+          element.category.toUpperCase().contains(name.toUpperCase())) {
         result.add(element);
       }
     });
