@@ -2,14 +2,14 @@
 
 Feature:
  + Favorite:                DONE
- + Cart:                    DONE (issue: non check available quantity)
+ + Cart:                    DONE
  + Checkout:                DONE
  + Profile:                 DONE
- + Order history:           DONE (issue: random id)
- + Flash Sale:              DONE (issue: not control count down finish)
+ + Order history:           DONE
+ + Flash Sale:              DONE
  + Rating-Review:           DONE
  + Parity product:          DONE
- + Search:                  DONE (???????????)
- + Filter by Category:      DONE (issue: Category Other)
- + See all product:         DONE (issue: filter)
+ + Search:                  DONE
+ + Filter by Category:      DONE
+ + See all product:         DONE
  + Sort price:              DONE
