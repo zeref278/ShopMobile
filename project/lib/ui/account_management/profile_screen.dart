@@ -57,13 +57,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onPressed: isEditMode
               ? () {
                   //Submit change here - You can check logic in here
-                  userData.changeInformation(
-                    username: controllerName.text,
-                    email: controllerEmail.text,
-                    phoneNumber: controllerPhone.text,
-                    dateOfBirth: controllerDate.text,
-                    address: controllerAddress.text,
-                  );
+                  // userData.changeInformation(
+                  //   username: controllerName.text,
+                  //   email: controllerEmail.text,
+                  //   phoneNumber: controllerPhone.text,
+                  //   dateOfBirth: controllerDate.text,
+                  //   address: controllerAddress.text,
+                  // );
 
                   //------Show dialog to notify edit successful
                   showDialog(

@@ -6,8 +6,7 @@ import 'package:project/providers/cart_provider.dart';
 import 'package:project/providers/orders_provider.dart';
 import 'package:project/providers/products_provider.dart';
 import 'package:project/providers/users_provider.dart';
-import 'package:project/ui/drawer_customization/menu_screen.dart';
-
+import 'package:project/ui/authentication/login_screen.dart';
 
 import 'package:provider/provider.dart';
 
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MenuScreen(),
+        home: LoginScreen(),
       ),
     );
   }

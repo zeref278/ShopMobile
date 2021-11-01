@@ -11,40 +11,7 @@ class ProductProvider with ChangeNotifier {
   List<Product> _products = [
     Product(
         productID: 'SP01',
-        feedbacks: [
-          FeedbackModel(
-              user: User(
-                idUser: 02,
-                userName: 'Test User 1',
-                email: 'linhtranttdl@gmail.com',
-                address: 'Da Nang',
-                gender: false,
-                dateOfBirth: DateFormat("dd/MM/yyyy")
-                    .format(DateTime.parse("2019-09-30")),
-                phoneNumber: '0123456789',
-                avatarPath: 'assets/avatar_test1.png',
-              ),
-              rating: 5,
-              comment:
-                  'Mình mua MacBook Air M1 2020 ngày 22/9 sau đó dùng được 3 tiếng phát hiện sau loa bị rè khi bật 2 nấc cuối. Sáng ngày 23/9 mình qua chi nhánh cellphones Nguyễn Thị Thập đổi, trong quá trình đổi anh kĩ thuật và anh quản lí tên Thoại rất tận tâm kiểm tra cho mình, sau đó mình cũng đổi một máy mới. Cuối cùng mình phát hiện ra con MacBook sau cũng có dấu hiệu rè (nhưng ở mức chấp nhận được). Rất hài lòng về chất lượng dịch vụ, sẽ tiếp tục mua của cửa hàng.',
-              time: '30/10/2021 17:17:17'),
-          FeedbackModel(
-              user: User(
-                idUser: 03,
-                userName: 'Test User 111111111111111',
-                email: 'linhtranttdl@gmail.com',
-                address: 'Da Nang',
-                gender: false,
-                dateOfBirth: DateFormat("dd/MM/yyyy")
-                    .format(DateTime.parse("2019-09-30")),
-                phoneNumber: '0123456789',
-                avatarPath: 'assets/avatar_test2.png',
-              ),
-              rating: 4,
-              comment:
-                  'vừa mua chưa được 1 tuần thì thấy sale còn 24tr6, tức thật',
-              time: '29/10/2021 10:10:10'),
-        ],
+        feedbacks: [],
         isFavorite: false,
         name: 'Mix',
         price: 10000000,
@@ -219,40 +186,7 @@ class ProductProvider with ChangeNotifier {
         }),
     Product(
         productID: 'SP08',
-        feedbacks: [
-          FeedbackModel(
-              user: User(
-                idUser: 02,
-                userName: 'Test User 1',
-                email: 'linhtranttdl@gmail.com',
-                address: 'Da Nang',
-                gender: false,
-                dateOfBirth: DateFormat("dd/MM/yyyy")
-                    .format(DateTime.parse("2019-09-30")),
-                phoneNumber: '0123456789',
-                avatarPath: 'assets/avatar_test1.png',
-              ),
-              rating: 5,
-              comment:
-                  'Mình mua MacBook Air M1 2020 ngày 22/9 sau đó dùng được 3 tiếng phát hiện sau loa bị rè khi bật 2 nấc cuối. Sáng ngày 23/9 mình qua chi nhánh cellphones Nguyễn Thị Thập đổi, trong quá trình đổi anh kĩ thuật và anh quản lí tên Thoại rất tận tâm kiểm tra cho mình, sau đó mình cũng đổi một máy mới. Cuối cùng mình phát hiện ra con MacBook sau cũng có dấu hiệu rè (nhưng ở mức chấp nhận được). Rất hài lòng về chất lượng dịch vụ, sẽ tiếp tục mua của cửa hàng.',
-              time: '30/10/2021 17:17:17'),
-          FeedbackModel(
-              user: User(
-                idUser: 03,
-                userName: 'Test User 111111111111111',
-                email: 'linhtranttdl@gmail.com',
-                address: 'Da Nang',
-                gender: false,
-                dateOfBirth: DateFormat("dd/MM/yyyy")
-                    .format(DateTime.parse("2019-09-30")),
-                phoneNumber: '0123456789',
-                avatarPath: 'assets/avatar_test2.png',
-              ),
-              rating: 4,
-              comment:
-                  'vừa mua chưa được 1 tuần thì thấy sale còn 24tr6, tức thật',
-              time: '29/10/2021 10:10:10'),
-        ],
+        feedbacks: [],
         isFavorite: false,
         name: 'iPhone 13 Mini',
         price: 23000000,

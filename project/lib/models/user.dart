@@ -2,6 +2,7 @@ class User {
   int idUser;
   String avatarPath;
   String email;
+  String password;
   String phoneNumber;
   String userName;
   String? address;
@@ -11,9 +12,10 @@ class User {
   User({
     required this.idUser,
     required this.email,
+    required this.password,
     required this.phoneNumber,
     required this.userName,
-    required this.address,
+    this.address,
     required this.avatarPath,
     required this.gender,
     this.dateOfBirth,
