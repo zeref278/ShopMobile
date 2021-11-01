@@ -12,14 +12,22 @@ import 'package:project/providers/products_provider.dart';
 import 'package:project/providers/users_provider.dart';
 import 'package:project/ui/cart/cart_screen.dart';
 import 'package:project/ui/checkout/checkout_one_item.dart';
+import 'package:project/ui/search_result/search_result_screen.dart';
 import 'package:project/ui/widget_customization/card_customization/feedback_item.dart';
 import 'package:project/ui/widget_customization/divider_customization/text_divider.dart';
 import 'package:project/ui/widget_customization/listview_customization/horizontal_listview_parity_product.dart';
+import 'package:project/ui/widget_customization/search_bar_customization/animated_search_bar.dart';
 import 'package:project/ui/widget_customization/text_field_customization/text_field_customization.dart';
 import 'package:provider/provider.dart';
 
+
+//------ Most important screen
 class ProductDetailScreen extends StatefulWidget {
+
+  //------Index of product in PRODUCT PROVIDER
   final int index;
+
+  //------Product to show
   final Product product;
 
   ProductDetailScreen({required this.product, required this.index});
@@ -29,15 +37,22 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+
+  //------Store your choice
   String? _storage;
   String? _color;
   int _quantity = 1;
-  TextEditingController commentController = TextEditingController();
 
+  TextEditingController commentController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
+
+  //------Number of stars
   double rating = 1;
 
   @override
   void initState() {
+
+    //init value to STORAGE and COLOR
     _storage = widget.product.storageAvailable.first;
     _color = widget.product.colorAvailable.first;
     super.initState();
@@ -50,15 +65,48 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       return Scaffold(
         backgroundColor: defaultBackgroundColor,
         appBar: AppBar(
-          elevation: 0.1,
           backgroundColor: defaultPrimaryColor,
-          title: Text('Product Detail'),
-          actions: <Widget>[
+          title: Text(
+            'All products',
+          ),
+          actions: [
+            AnimatedSearchBar(
+              prefixIcon: Icon(
+                CupertinoIcons.search,
+                color: Colors.black,
+              ),
+              suffixIcon: Icon(
+                CupertinoIcons.xmark,
+                color: Colors.black,
+              ),
+              width: size.width - 65,
+              textController: searchController,
+              rtl: true,
+              onSuffixTap: () {
+                setState(() {
+                  searchController.clear();
+                });
+              },
+              onSubmitted: (String value) {
+                if (value != '' && value != '\n') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchResultScreen(
+                          strValue: value,
+                        )),
+                  );
+                }
+              },
+            ),
+            SizedBox(
+              width: 10,
+            ),
             Container(
               width: 40,
               height: 40,
               decoration:
-                  BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+              BoxDecoration(color: Colors.white, shape: BoxShape.circle),
               child: IconButton(
                   icon: Consumer<CartProvider>(
                     builder: (context, cartData, _) {
@@ -80,7 +128,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => CartScreen()))),
             ),
-            SizedBox(width: 15)
+            SizedBox(width: 10)
           ],
         ),
         body: SafeArea(
@@ -126,6 +174,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
+
+                //------Select STORAGE, COLOR, QUANTITY
                 Text(
                   'Select Option',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -156,7 +206,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             items:
                                 widget.product.storageAvailable.map((location) {
                               return DropdownMenuItem(
-                                child: new Text(location),
+                                child: Text(location),
                                 value: location,
                               );
                             }).toList(),
@@ -239,7 +289,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Row(
                     children: <Widget>[
-                      //======The size button
+                      //------Button BUY NOW
                       Expanded(
                           child: MaterialButton(
                         onPressed: () =>
@@ -262,6 +312,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       )),
+
+                      //------Button add product to cart
                       Consumer<CartProvider>(
                         builder: (context, cartData, _) {
                           return IconButton(
@@ -280,6 +332,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         },
                       ),
 
+                      //------Button favorite
                       IconButton(
                           onPressed: () {
                             setState(() {
@@ -296,6 +349,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ],
                   ),
                 ),
+
+                //------Feature Parity Product
                 TextDivider(
                   child: Text(
                     "Parity Products",
@@ -394,6 +449,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   child: Text(widget.product.shortDescription),
                 ),
                 SizedBox(height: 15),
+
+
+                //------ RATING AND COMMENT
                 Container(
                   width: size.width * 0.95,
                   child: Card(
@@ -412,6 +470,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 color: Colors.deepPurple),
                           ),
                           SizedBox(height: 15),
+
+                          //Get number of star - it will auto recalculate when you submit your rating
                           Text(
                             '${productsData.products[widget.index].getRating().toStringAsFixed(1)}/5',
                             style: TextStyle(
@@ -420,6 +480,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           SizedBox(
                             height: 5,
                           ),
+
+                          //View number of star - READ ONLY
                           RatingBar(
                             allowHalfRating: true,
                             initialRating:
@@ -441,6 +503,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           SizedBox(
                             height: 10,
                           ),
+
+                          //Number of rating-comment in product
                           Text(
                             '${productsData.products[widget.index].feedbacks.length} rating & comment',
                             style: TextStyle(
@@ -450,6 +514,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Text('What do you think about this product ?'),
                           Consumer<UserProvider>(
                             builder: (context, usersData, _) {
+
+                              //It show a dialog to write you rating
+                              //CANCEL or SEND your rating, var rating and textField will clear
                               return MaterialButton(
                                   elevation: 10,
                                   color: defaultPrimaryColor,
@@ -583,6 +650,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             },
                           ),
                           SizedBox(height: 10),
+
+                          //Show rating here
                           Column(
                             children: productsData
                                 .products[widget.index].feedbacks

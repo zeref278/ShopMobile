@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 
+//------Like name
+
 class SearchResultScreen extends StatefulWidget {
   final String strValue;
 

@@ -15,7 +15,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  //------Edit Mode or Read Only Mode
   late bool isEditMode;
+
+  //------Var to control TextField
   late TextEditingController controllerName;
   late TextEditingController controllerEmail;
   late TextEditingController controllerPhone;
@@ -41,6 +44,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Consumer<UserProvider>(builder: (context, userData, _) {
       return Scaffold(
         backgroundColor: defaultBackgroundColor,
+
+        //------FloatingActionButton to switch Edit Mode: submit change - Read Only: switch to Edit Mode
         floatingActionButton: FloatingActionButton(
           elevation: 10,
           backgroundColor: isEditMode ? defaultPrimaryColor : Colors.blue,
@@ -51,6 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           onPressed: isEditMode
               ? () {
+                  //Submit change here - You can check logic in here
                   userData.changeInformation(
                     username: controllerName.text,
                     email: controllerEmail.text,
@@ -59,6 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     address: controllerAddress.text,
                   );
 
+                  //------Show dialog to notify edit successful
                   showDialog(
                       context: context,
                       builder: (context) {
@@ -68,8 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             style: TextStyle(fontSize: 18),
                           ),
                           content: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
                                 width: 5,
@@ -99,6 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         );
                       });
 
+                  //------Switch mode
                   setState(() {
                     isEditMode = false;
                   });
@@ -109,6 +116,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
         ),
+
+        //------TextField start here
         body: SingleChildScrollView(
             padding: EdgeInsets.all(10),
             child: Column(
@@ -153,6 +162,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   height: 15,
                 ),
+
+                //------Can't change gender because i can't fix bug here, lol :))
                 TextFieldCustomization(
                   isEdit: false,
                   icon: Icon(Icons.accessibility),
@@ -228,6 +239,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     });
   }
+
   @override
   void dispose() {
     controllerName.dispose();

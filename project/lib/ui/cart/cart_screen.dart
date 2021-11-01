@@ -10,27 +10,17 @@ import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 
+//This is screen show cart item, CART ITEM is so important
+
 class CartScreen extends StatefulWidget {
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  //bool _isLoading = false;
 
   @override
   void initState() {
-    // setState(() {
-    //   _isLoading = true;
-    // });
-
-    // Provider.of<CartProvider>(context, listen: false)
-    //     .fetchAndSetCategories()
-    //     .then((_) {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // });
     super.initState();
   }
 
@@ -38,6 +28,8 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
+
+      //------AppBar
       appBar: AppBar(
         elevation: 0.1,
         backgroundColor: defaultPrimaryColor,

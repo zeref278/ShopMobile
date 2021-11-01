@@ -4,6 +4,8 @@ import 'package:project/ui/widget_customization/card_customization/order_item.da
 import 'package:project/providers/orders_provider.dart';
 import 'package:provider/provider.dart';
 
+//------Show order history (not detail)
+
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({Key? key}) : super(key: key);
 

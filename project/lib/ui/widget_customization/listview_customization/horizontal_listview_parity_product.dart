@@ -4,6 +4,10 @@ import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/widget_customization/card_customization/flash_sale_item.dart';
 import 'package:provider/provider.dart';
 
+
+// Second parameter in filterProductByParityPrice is a range price
+// |productPrice - parityProductPrice| <= epsilon: second parameter
+
 class HorizontalListviewParityProduct extends StatelessWidget {
 
   final Product product;

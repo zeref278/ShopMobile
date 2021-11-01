@@ -4,6 +4,8 @@ import 'package:project/models/order.dart';
 import '../../constants.dart';
 import '../widget_customization/card_customization/order_detail_item.dart';
 
+//------Show list product in order history
+
 class OrderDetailScreen extends StatelessWidget {
   final Order order;
 

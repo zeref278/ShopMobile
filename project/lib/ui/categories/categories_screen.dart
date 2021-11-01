@@ -5,6 +5,7 @@ import 'package:project/models/category_model.dart';
 import 'package:project/providers/cart_provider.dart';
 import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/cart/cart_screen.dart';
+import 'package:project/ui/search_result/search_result_screen.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_gridview.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_listview.dart';
 import 'package:project/ui/widget_customization/search_bar_customization/animated_search_bar.dart';
@@ -12,7 +13,12 @@ import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 
+
+// This is screen to show filter results by CATEGORY (from HOME SCREEN)
+
 class CategoriesScreen extends StatefulWidget {
+
+  //------This is category that you want filter
   final CategoryModel category;
 
   CategoriesScreen({
@@ -23,8 +29,14 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
+
+  //------
   TextEditingController textController = TextEditingController();
+
+  //------To switch Grid-List: true - grid or false - list
   bool isGridMode = true;
+
+  //------It used for sorting price, none-ascending-descending , you can use enum here
   String isSort = 'none';
 
   @override
@@ -32,6 +44,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
+
       appBar: AppBar(
         backgroundColor: defaultPrimaryColor,
         title: Text(
@@ -54,6 +67,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               setState(() {
                 textController.clear();
               });
+            },
+            onSubmitted: (String value) {
+              if (value != '' && value != '\n') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SearchResultScreen(
+                        strValue: value,
+                      )),
+                );
+              }
             },
           ),
           SizedBox(
@@ -97,6 +121,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+
+                    //------Icon switch sort type
                     IconButton(
                       icon: (isSort == 'none' || isSort == 'descending')
                           ? Icon(
@@ -119,6 +145,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         });
                       },
                     ),
+                    //------Icon switch view mode
                     IconButton(
                       icon: Icon(
                         isGridMode
@@ -135,6 +162,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   ],
                 ),
                 SizedBox(height: 10),
+
+                //------ This is main of screen
                 isGridMode
                     ? ProductsGridview(
                         isSort: isSort,

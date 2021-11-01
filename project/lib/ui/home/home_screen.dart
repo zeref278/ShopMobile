@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   bool isGridMode = true;
 
   @override
@@ -57,6 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 10,
           ),
+
+          //------ Feature FLASH SALE
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(

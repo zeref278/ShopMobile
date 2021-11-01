@@ -16,6 +16,9 @@ import 'package:provider/provider.dart';
 import '../../constants.dart';
 import '../widget_customization/divider_customization/text_divider.dart';
 
+
+// This is screen handle what occur when you click BUY NOW in PRODUCT DETAIL screen
+
 class CheckoutOneItemScreen extends StatefulWidget {
   final CartItemModel itemModel;
 
@@ -26,9 +29,15 @@ class CheckoutOneItemScreen extends StatefulWidget {
 }
 
 class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
+
+  //------Create random id
   Random random = new Random();
   int randomNumber = 0;
+
+  //------COD or Credit Card
   bool isCod = true;
+
+  //------Like name
   late var controllerAddress;
 
   @override
@@ -117,7 +126,10 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                 ),
               ),
               SizedBox(height: 5,),
+
+              //------View product
               OrderDetailItem(itemModel: widget.itemModel),
+
               SizedBox(
                 height: 10,
               ),
@@ -145,6 +157,8 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                 ),
               ),
               SizedBox(height: 5,),
+
+              //------Button switch COD - Credit Card
               ButtonCustomization(
                 textColor: !isCod ? Colors.white : Colors.black,
                 iconData: CupertinoIcons.creditcard,
@@ -165,6 +179,8 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
               SizedBox(
                 height: 10,
               ),
+
+              //------Button switch COD - Credit Card
               ButtonCustomization(
                 textColor: isCod ? Colors.white : Colors.black,
                 iconData: CupertinoIcons.paperplane,
@@ -212,6 +228,10 @@ class _CheckoutOneItemScreenState extends State<CheckoutOneItemScreen> {
                   ),
                   Consumer<OrderProvider>(builder: (context, orderData, _) {
                     return MaterialButton(
+
+                      //------When you pressed ORDER, provider add new order in ORDER PROVIDER
+                      //and clear CART ITEM
+
                       onPressed: () {
                         orderData.addOrder(Order(
                             status: 1,

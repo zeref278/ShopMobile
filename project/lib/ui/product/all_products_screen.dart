@@ -5,6 +5,7 @@ import 'package:project/constants.dart';
 import 'package:project/providers/cart_provider.dart';
 import 'package:project/providers/products_provider.dart';
 import 'package:project/ui/cart/cart_screen.dart';
+import 'package:project/ui/search_result/search_result_screen.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_gridview.dart';
 import 'package:project/ui/widget_customization/listview_customization/products_listview.dart';
 import 'package:project/ui/widget_customization/search_bar_customization/animated_search_bar.dart';
@@ -47,6 +48,17 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               setState(() {
                 textController.clear();
               });
+            },
+            onSubmitted: (String value) {
+              if (value != '' && value != '\n') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SearchResultScreen(
+                        strValue: value,
+                      )),
+                );
+              }
             },
           ),
           SizedBox(
